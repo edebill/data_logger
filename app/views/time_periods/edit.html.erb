@@ -1,0 +1,24 @@
+<h1>Editing time_period</h1>
+
+<% form_for(@time_period) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :source_id %><br />
+    <%= f.text_field :source_id %>
+  </p>
+  <p>
+    <%= f.label :time_start %><br />
+    <%= f.datetime_select :time_start %>
+  </p>
+  <p>
+    <%= f.label :time_end %><br />
+    <%= f.datetime_select :time_end %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @time_period %> |
+<%= link_to 'Back', time_periods_path %>

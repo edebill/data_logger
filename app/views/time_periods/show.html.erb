@@ -1,0 +1,18 @@
+<p>
+  <b>Source:</b>
+  <%=h @time_period.source_id %>
+</p>
+
+<p>
+  <b>Time start:</b>
+  <%=h @time_period.time_start %>
+</p>
+
+<p>
+  <b>Time end:</b>
+  <%=h @time_period.time_end %>
+</p>
+
+
+<%= link_to 'Edit', edit_time_period_path(@time_period) %> |
+<%= link_to 'Back', time_periods_path %>
