@@ -1,0 +1,13 @@
+<p>
+  <b>Temp:</b>
+  <%=h @fahrenheit_temp.temp %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%=h @fahrenheit_temp.source_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_fahrenheit_temp_path(@fahrenheit_temp) %> |
+<%= link_to 'Back', fahrenheit_temps_path %>

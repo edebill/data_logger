@@ -1,0 +1,22 @@
+<h1>Listing fahrenheit_temps</h1>
+
+<table>
+  <tr>
+    <th>Temp</th>
+    <th>Source</th>
+  </tr>
+
+<% @fahrenheit_temps.each do |fahrenheit_temp| %>
+  <tr>
+    <td><%=h fahrenheit_temp.temp %></td>
+    <td><%=h fahrenheit_temp.source_id %></td>
+    <td><%= link_to 'Show', fahrenheit_temp %></td>
+    <td><%= link_to 'Edit', edit_fahrenheit_temp_path(fahrenheit_temp) %></td>
+    <td><%= link_to 'Destroy', fahrenheit_temp, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New fahrenheit_temp', new_fahrenheit_temp_path %>

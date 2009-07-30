@@ -2,7 +2,7 @@ class TimePeriod < ActiveRecord::Base
   belongs_to :source
   validates_presence_of :time_start, :time_end
 
-  validates_each :start_time do |record, attr, value|
+  validates_each :time_start do |record, attr, value|
     record.errors.add attr, 'must be before end_time' if value >= time_end
   end
 

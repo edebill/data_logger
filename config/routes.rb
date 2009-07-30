@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :fahrenheit_temps
+
   map.resources :time_periods
 
   map.resources :sources
