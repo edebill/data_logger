@@ -2,7 +2,7 @@ class FahrenheitTempsController < ApplicationController
   # GET /fahrenheit_temps
   # GET /fahrenheit_temps.xml
   def index
-    @fahrenheit_temps = FahrenheitTemp.all
+    @fahrenheit_temps = FahrenheitTemp.find(:all, :order => :sampled_at)
 
     respond_to do |format|
       format.html # index.html.erb

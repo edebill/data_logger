@@ -9,13 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090730022539) do
+ActiveRecord::Schema.define(:version => 20090802175653) do
 
   create_table "fahrenheit_temps", :force => true do |t|
     t.float    "temp"
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "sampled_at"
   end
 
   create_table "sources", :force => true do |t|

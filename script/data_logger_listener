@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 puts 'loading Rails...'
-require File.dirname(__FILE__) + '/../config/boot'
+require File.dirname(__FILE__) + '/../config/environment'
 
 require 'serialport'
 
