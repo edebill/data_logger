@@ -2,7 +2,7 @@ class ReportController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @graph = open_flash_chart_object(600,300,url_for(:action => 'index',
+        @graph = open_flash_chart_object(800,500,url_for(:action => 'index',
                                                          :format => 'json'))
       }
 
@@ -10,47 +10,56 @@ class ReportController < ApplicationController
         title = Title.new("Recent Temperatures")
 
         data1 = []
-
-
-
-        temps = FahrenheitTemp.find(:all, :conditions => [ 'sampled_at >= ?', Time.now - 60 * 60 * 2 ],
+        source = Source.find_by_name("ds_reader")
+        temps = FahrenheitTemp.find(:all,
+                                    :conditions => [ 'source_id = ?', source.id],
                                     :order => :sampled_at)
 
+        step_size = ReportController.calculate_step_size(temps)
+        first_time = ReportController.calculate_first_time(temps[0].sampled_at, step_size)
+        
         by_temp = temps.sort { |a,b| a.temp <=> b.temp }
 
-        max = Integer(by_temp[-1].temp / 10.0) * 10 + 1
-        min = Integer(by_temp[0].temp / 10.0) * 10
-
-
+        max = Integer(by_temp[-1].temp / 5.0) * 5 + 5
+        min = Integer(by_temp[0].temp / 5.0) * 5
 
         x_labels = XAxisLabels.new
-        x_labels.set_vertical()
 
         labels = []
-        120.downto(0) do |n|
-          time = Time.now - n * 60
-          display_time = sprintf("%d:%02d", time.hour, time.min)
-          if time.min % 15 == 0
-            labels <<  XAxisLabel.new(display_time, '#0000ff', 20, 'diagonal')
-          else
+        seconds_diff = temps[-1].sampled_at - temps[0].sampled_at
+        steps = Integer((seconds_diff / 60.0) / step_size) * step_size + step_size
+
+        step_time = first_time
+        step_no = 0
+        while step_time < temps[-1].sampled_at
+          next_step = step_time + 60 * step_size
+
+          display_time = sprintf("%s %d, %d:%02d", step_time.month, step_time.day, step_time.hour, step_time.min)
+          
+          if step_no % 5 == 0
+            labels <<  XAxisLabel.new(display_time, '#0000ff', 20, 80)
+          else 
             labels << nil
           end
           
           tlist = []
           temps.each do |t|
-            if t.sampled_at.hour == time.hour &&
-                t.sampled_at.min == time.min
+            if t.sampled_at > step_time &&
+                t.sampled_at <=  next_step
               tlist << t.temp
             end
             
           end
           data1 << tlist[0]
+          step_time = next_step
+          step_no += 1
         end
 
         x_labels.labels = labels
 
         x = XAxis.new
         x.set_labels(x_labels)
+
 
         line_dot = LineDot.new
         line_dot.text = "Line Dot"
@@ -84,4 +93,23 @@ class ReportController < ApplicationController
   end
 
 
+  protected
+
+  def self.calculate_step_size(temps)
+    secs = temps[-1].sampled_at - temps[0].sampled_at
+
+    minutes = secs/60
+
+    possible_steps = [1, 5, 10, 15, 20, 30, 60, 120, 240, 360, 720]
+    step = 1
+    while minutes / step > 200
+      step = possible_steps.shift
+    end
+
+    return step
+  end
+
+  def self.calculate_first_time(earliest, step_size)
+    return Time.at(Integer((earliest.to_i / 60.0) / step_size) * step_size * 60)
+  end
 end

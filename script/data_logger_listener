@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/../config/environment'
 
 require 'serialport'
 
-sp = SerialPort.new "/dev/tty.usbserial-A7006vDu"
+sp = SerialPort.new "/dev/tty.usbserial-A6005v1G"
 
 while true
   foo = sp.gets
