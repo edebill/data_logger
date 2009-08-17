@@ -1,3 +1,12 @@
 <script type="text/javascript" src="/javascripts/swfobject.js"></script>
 <%= @graph %>
+<% form_for @report, :url => { :controller => 'report',
+                               :action => 'index' }  do |f| %>
+  <%= f.label :start %>
+  <%= f.text_field :start %>
 
+  <%= f.label :end %>
+  <%= f.text_field :end %>
+
+  <%= submit_tag 'submit' %>
+<% end %>

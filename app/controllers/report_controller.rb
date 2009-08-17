@@ -1,9 +1,22 @@
 class ReportController < ApplicationController
   def index
+    @report = ReportParameters.new(params[:report_parameters])
+    unless @report.start
+      logger.debug("defaulting report start to 2 days ago")
+      @report.start = Time.now - (60 * 60 * 24 * 2)
+    end
+    unless @report.end
+      logger.debug("defaulting report end to now")
+      @report.end = Time.now
+    end
+ 
     respond_to do |format|
       format.html {
-        @graph = open_flash_chart_object(800,500,url_for(:action => 'index',
-                                                         :format => 'json'))
+        @graph = open_flash_chart_object(800,700,url_for(:action => 'index',
+                                                         :format => 'json',
+                                                         :report_parameters => {
+                                                           :start => @report.start,
+                                                           :end => @report.end}))
       }
 
       format.json {
@@ -12,7 +25,7 @@ class ReportController < ApplicationController
         data1 = []
         source = Source.find_by_name("ds_reader")
         temps = FahrenheitTemp.find(:all,
-                                    :conditions => [ 'source_id = ?', source.id],
+                                    :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  @report.start, @report.end],
                                     :order => :sampled_at)
 
         step_size = ReportController.calculate_step_size(temps)
@@ -34,7 +47,7 @@ class ReportController < ApplicationController
         while step_time < temps[-1].sampled_at
           next_step = step_time + 60 * step_size
 
-          display_time = sprintf("%s %d, %d:%02d", step_time.month, step_time.day, step_time.hour, step_time.min)
+          display_time = step_time.strftime("%b %d, %k:%M %Z")
           
           if step_no % 5 == 0
             labels <<  XAxisLabel.new(display_time, '#0000ff', 20, 80)
@@ -42,15 +55,22 @@ class ReportController < ApplicationController
             labels << nil
           end
           
-          tlist = []
+          t_total = 0.0
+          t_count = 0.0
           temps.each do |t|
             if t.sampled_at > step_time &&
                 t.sampled_at <=  next_step
-              tlist << t.temp
+              t_total +=  t.temp
+              t_count += 1
             end
-            
           end
-          data1 << tlist[0]
+
+          if(t_count > 0)
+            data1 << t_total / t_count
+          else
+            data1 << 0
+          end
+
           step_time = next_step
           step_no += 1
         end
@@ -102,7 +122,7 @@ class ReportController < ApplicationController
 
     possible_steps = [1, 5, 10, 15, 20, 30, 60, 120, 240, 360, 720]
     step = 1
-    while minutes / step > 200
+    while (minutes / step) > 200
       step = possible_steps.shift
     end
 
