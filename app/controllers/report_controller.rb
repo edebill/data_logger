@@ -9,6 +9,10 @@ class ReportController < ApplicationController
       logger.debug("defaulting report end to now")
       @report.end = Time.now
     end
+    @source = Source.find_by_name(@report.source)
+    unless @source
+      return render  :file =>  "#{RAILS_ROOT}/public/404.html", :status => :not_found
+    end
  
     respond_to do |format|
       format.html {
@@ -16,16 +20,17 @@ class ReportController < ApplicationController
                                                          :format => 'json',
                                                          :report_parameters => {
                                                            :start => @report.start,
-                                                           :end => @report.end}))
+                                                           :end => @report.end,
+                                                           :source => @report.source}))
       }
 
       format.json {
         title = Title.new("Recent Temperatures")
 
         data1 = []
-        source = Source.find_by_name("ds_reader")
+        
         temps = FahrenheitTemp.find(:all,
-                                    :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  @report.start, @report.end],
+                                    :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', @source.id,  @report.start, @report.end],
                                     :order => :sampled_at)
 
         step_size = ReportController.calculate_step_size(temps)

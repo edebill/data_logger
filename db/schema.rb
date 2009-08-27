@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090817025242) do
+ActiveRecord::Schema.define(:version => 20090827003958) do
 
   create_table "fahrenheit_temps", :force => true do |t|
     t.float    "temp"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20090817025242) do
     t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "source"
   end
 
   create_table "sources", :force => true do |t|
