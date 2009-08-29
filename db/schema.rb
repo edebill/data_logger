@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090827003958) do
+ActiveRecord::Schema.define(:version => 20090829142924) do
 
   create_table "fahrenheit_temps", :force => true do |t|
     t.float    "temp"
@@ -19,7 +19,17 @@ ActiveRecord::Schema.define(:version => 20090827003958) do
     t.datetime "sampled_at"
   end
 
-  create_table "report_parameters", :force => true do |t|
+  create_table "report_sources", :force => true do |t|
+    t.integer  "report_id"
+    t.integer  "source_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "report_sources", ["report_id"], :name => "index_report_sources_on_report_id"
+  add_index "report_sources", ["source_id"], :name => "index_report_sources_on_source_id"
+
+  create_table "reports", :force => true do |t|
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at"

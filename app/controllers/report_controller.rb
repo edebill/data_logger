@@ -1,36 +1,45 @@
 class ReportController < ApplicationController
   def index
-    @report = ReportParameters.new(params[:report_parameters])
+    @report = Report.new(params[:report])
+    @report.start = Time.now  - (60 * 60 * 24 * 2) || @report.start
+    @sources = Source.find(:all, :order => :name)
+  end
+
+  def show
+
+
+    params[:report][:sources] = params[:report][:sources].collect {|s| Source.find(s.to_i)}
+    
+    
+    @report = Report.new(params[:report])
     unless @report.start
       logger.debug("defaulting report start to 2 days ago")
       @report.start = Time.now - (60 * 60 * 24 * 2)
     end
-    unless @report.end
-      logger.debug("defaulting report end to now")
-      @report.end = Time.now
-    end
-    @source = Source.find_by_name(@report.source)
+    @source = @report.sources[0]
     unless @source
-      return render  :file =>  "#{RAILS_ROOT}/public/404.html", :status => :not_found
+      return render(  :file =>  "#{RAILS_ROOT}/public/404.html", :status => :not_found)
     end
+    @sources = Source.find(:all, :order => :name)
  
     respond_to do |format|
       format.html {
-        @graph = open_flash_chart_object(800,700,url_for(:action => 'index',
+        @graph = open_flash_chart_object(800,700,url_for(:action => 'show',
                                                          :format => 'json',
-                                                         :report_parameters => {
+                                                         :report => {
                                                            :start => @report.start,
                                                            :end => @report.end,
-                                                           :source => @report.source}))
+                                                           :sources =>  @report.sources.collect {|s| s.id }}))
       }
 
       format.json {
         title = Title.new("Recent Temperatures")
 
         data1 = []
-        
+
+        report_end = @report.end || Time.now
         temps = FahrenheitTemp.find(:all,
-                                    :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', @source.id,  @report.start, @report.end],
+                                    :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', @source.id,  @report.start, report_end],
                                     :order => :sampled_at)
 
         step_size = ReportController.calculate_step_size(temps)

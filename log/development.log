@@ -1,0 +1,1840 @@
+# Logfile created on Tue Aug 18 19:26:05 -0500 2009  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPGError: ERROR: relation "fahrenheit_temps" does not exist
+LINE 4: WHERE a.attrelid = '"fahrenheit_temps"'::regcla...
+ ^
+: SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"fahrenheit_temps"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (67.5ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (27.4ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (59.3ms)[0m   [0;1mCREATE TABLE "sources" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (2.1ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090630005902')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateTimePeriods (20090630010143)
+  [4;35;1mSQL (0.9ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (7.2ms)[0m   [0;1mCREATE TABLE "time_periods" ("id" serial primary key, "source_id" integer, "time_start" timestamp, "time_end" timestamp, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090630010143')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateFahrenheitTemps (20090730022539)
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (6.1ms)[0m   [0;1mCREATE TABLE "fahrenheit_temps" ("id" serial primary key, "temp" float, "source_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090730022539')[0m
+  [4;36;1mSQL (6.6ms)[0m   [0;1mCOMMIT[0m
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mALTER TABLE "fahrenheit_temps" ADD COLUMN "sampled_at" timestamp[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mupdate fahrenheit_temps set sampled_at = created_at where sampled_at is null[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090802175653')[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+Migrating to CreateReportParameters (20090817025242)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (4.4ms)[0m   [0mCREATE TABLE "report_parameters" ("id" serial primary key, "start" timestamp, "end" timestamp, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090817025242')[0m
+  [4;35;1mSQL (2.5ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSource Load (2.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "sources" ("name", "updated_at", "created_at") VALUES(E'ds_reader2', '2009-08-27 00:18:43.721371', '2009-08-27 00:18:43.721371') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:43.871349', '2009-08-27 00:18:43.788908', 90.05, 1, '2009-08-27 00:18:43.871349') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (1.0ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:44.674086', '2009-08-27 00:18:44.672584', 90.05, 1, '2009-08-27 00:18:44.674086') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:45.728591', '2009-08-27 00:18:45.727140', 90.05, 1, '2009-08-27 00:18:45.728591') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:46.768672', '2009-08-27 00:18:46.767159', 90.05, 1, '2009-08-27 00:18:46.768672') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:47.807738', '2009-08-27 00:18:47.806197', 90.05, 1, '2009-08-27 00:18:47.807738') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:48.846472', '2009-08-27 00:18:48.845111', 90.05, 1, '2009-08-27 00:18:48.846472') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:49.885658', '2009-08-27 00:18:49.884131', 90.05, 1, '2009-08-27 00:18:49.885658') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:50.925170', '2009-08-27 00:18:50.923645', 90.05, 1, '2009-08-27 00:18:50.925170') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:51.980685', '2009-08-27 00:18:51.979142', 90.05, 1, '2009-08-27 00:18:51.980685') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:53.019684', '2009-08-27 00:18:53.018157', 90.05, 1, '2009-08-27 00:18:53.019684') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:54.058797', '2009-08-27 00:18:54.057241', 90.05, 1, '2009-08-27 00:18:54.058797') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:55.097019', '2009-08-27 00:18:55.095648', 90.05, 1, '2009-08-27 00:18:55.097019') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:56.136816', '2009-08-27 00:18:56.135194', 90.05, 1, '2009-08-27 00:18:56.136816') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:57.176773', '2009-08-27 00:18:57.175289', 90.05, 1, '2009-08-27 00:18:57.176773') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:58.231789', '2009-08-27 00:18:58.230340', 90.05, 1, '2009-08-27 00:18:58.231789') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:18:59.269783', '2009-08-27 00:18:59.268462', 90.05, 1, '2009-08-27 00:18:59.269783') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:00.309561', '2009-08-27 00:19:00.308208', 90.05, 1, '2009-08-27 00:19:00.309561') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:01.348827', '2009-08-27 00:19:01.347303', 90.05, 1, '2009-08-27 00:19:01.348827') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:02.387545', '2009-08-27 00:19:02.386210', 90.05, 1, '2009-08-27 00:19:02.387545') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:03.443535', '2009-08-27 00:19:03.442102', 90.05, 1, '2009-08-27 00:19:03.443535') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:04.483024', '2009-08-27 00:19:04.481356', 90.05, 1, '2009-08-27 00:19:04.483024') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:05.520790', '2009-08-27 00:19:05.519446', 90.05, 1, '2009-08-27 00:19:05.520790') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:06.560954', '2009-08-27 00:19:06.559439', 90.05, 1, '2009-08-27 00:19:06.560954') RETURNING "id"[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:07.599869', '2009-08-27 00:19:07.598321', 90.05, 1, '2009-08-27 00:19:07.599869') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:08.638700', '2009-08-27 00:19:08.637276', 90.05, 1, '2009-08-27 00:19:08.638700') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:09.693800', '2009-08-27 00:19:09.692267', 90.05, 1, '2009-08-27 00:19:09.693800') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:10.733848', '2009-08-27 00:19:10.732331', 90.05, 1, '2009-08-27 00:19:10.733848') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:11.772946', '2009-08-27 00:19:11.771415', 90.05, 1, '2009-08-27 00:19:11.772946') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:12.811872', '2009-08-27 00:19:12.810377', 90.15, 1, '2009-08-27 00:19:12.811872') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:13.851768', '2009-08-27 00:19:13.850431', 90.05, 1, '2009-08-27 00:19:13.851768') RETURNING "id"[0m
+  [4;36;1mSQL (10.5ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:14.890672', '2009-08-27 00:19:14.889370', 90.15, 1, '2009-08-27 00:19:14.890672') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:15.945904', '2009-08-27 00:19:15.944562', 90.15, 1, '2009-08-27 00:19:15.945904') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:16.984132', '2009-08-27 00:19:16.982765', 90.05, 1, '2009-08-27 00:19:16.984132') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:18.024709', '2009-08-27 00:19:18.023376', 90.05, 1, '2009-08-27 00:19:18.024709') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:19.063886', '2009-08-27 00:19:19.062432', 90.15, 1, '2009-08-27 00:19:19.063886') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:20.103002', '2009-08-27 00:19:20.101452', 90.15, 1, '2009-08-27 00:19:20.103002') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:21.142048', '2009-08-27 00:19:21.140608', 90.15, 1, '2009-08-27 00:19:21.142048') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:22.197889', '2009-08-27 00:19:22.196510', 90.15, 1, '2009-08-27 00:19:22.197889') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:23.236583', '2009-08-27 00:19:23.235251', 90.05, 1, '2009-08-27 00:19:23.236583') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:24.276250', '2009-08-27 00:19:24.274906', 90.05, 1, '2009-08-27 00:19:24.276250') RETURNING "id"[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (7.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:25.327510', '2009-08-27 00:19:25.316400', 90.15, 1, '2009-08-27 00:19:25.327510') RETURNING "id"[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:26.355675', '2009-08-27 00:19:26.354310', 90.05, 1, '2009-08-27 00:19:26.355675') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:27.394847', '2009-08-27 00:19:27.393319', 90.15, 1, '2009-08-27 00:19:27.394847') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:28.433836', '2009-08-27 00:19:28.432545', 90.05, 1, '2009-08-27 00:19:28.433836') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:29.488931', '2009-08-27 00:19:29.487392', 90.05, 1, '2009-08-27 00:19:29.488931') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:30.529104', '2009-08-27 00:19:30.527578', 90.15, 1, '2009-08-27 00:19:30.529104') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.6ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:31.566235', '2009-08-27 00:19:31.565312', 90.05, 1, '2009-08-27 00:19:31.566235') RETURNING "id"[0m
+  [4;36;1mSQL (29.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:32.607986', '2009-08-27 00:19:32.606629', 90.15, 1, '2009-08-27 00:19:32.607986') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:33.646907', '2009-08-27 00:19:33.645387', 90.05, 1, '2009-08-27 00:19:33.646907') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:34.686432', '2009-08-27 00:19:34.684754', 90.15, 1, '2009-08-27 00:19:34.686432') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:35.741127', '2009-08-27 00:19:35.739825', 90.15, 1, '2009-08-27 00:19:35.741127') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:36.780326', '2009-08-27 00:19:36.779006', 90.05, 1, '2009-08-27 00:19:36.780326') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (341.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:38.162882', '2009-08-27 00:19:38.161021', 90.05, 1, '2009-08-27 00:19:38.162882') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:38.860175', '2009-08-27 00:19:38.858744', 90.05, 1, '2009-08-27 00:19:38.860175') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:39.900279', '2009-08-27 00:19:39.898702', 90.05, 1, '2009-08-27 00:19:39.900279') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:40.941543', '2009-08-27 00:19:40.939148', 90.15, 1, '2009-08-27 00:19:40.941543') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSource Load (0.6ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:41.976911', '2009-08-27 00:19:41.975948', 90.15, 1, '2009-08-27 00:19:41.976911') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+
+
+Processing SourcesController#index (for 127.0.0.1 at 2009-08-26 19:19:41) [GET]
+  [4;36;1mSource Load (1.8ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 89ms (View: 83, DB: 2) | 200 OK [http://localhost/sources]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:43.032398', '2009-08-27 00:19:43.031418', 90.15, 1, '2009-08-27 00:19:43.032398') RETURNING "id"[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:44.072950', '2009-08-27 00:19:44.071942', 90.05, 1, '2009-08-27 00:19:44.072950') RETURNING "id"[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:45.113314', '2009-08-27 00:19:45.111593', 90.05, 1, '2009-08-27 00:19:45.113314') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:46.153484', '2009-08-27 00:19:46.151746', 90.05, 1, '2009-08-27 00:19:46.153484') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:47.191362', '2009-08-27 00:19:47.190021', 90.05, 1, '2009-08-27 00:19:47.191362') RETURNING "id"[0m
+  [4;36;1mSQL (15.4ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:19:47) [GET]
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering report/index
+Completed in 63ms (View: 7, DB: 0) | 200 OK [http://localhost/report]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:19:47) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:19:47 -0500", "start"=>"2009-08-24 19:19:47 -0500"}}
+  [4;35;1mSource Load (1.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:28:in `index'
+  app/controllers/report_controller.rb:13:in `index'
+
+Rendered rescues/_trace (36.4ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:48.232092', '2009-08-27 00:19:48.230720', 90.05, 1, '2009-08-27 00:19:48.232092') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:49.287020', '2009-08-27 00:19:49.286031', 90.05, 1, '2009-08-27 00:19:49.287020') RETURNING "id"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:50.327311', '2009-08-27 00:19:50.325781', 90.05, 1, '2009-08-27 00:19:50.327311') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:51.366535', '2009-08-27 00:19:51.365222', 90.05, 1, '2009-08-27 00:19:51.366535') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:52.406201', '2009-08-27 00:19:52.404636', 90.05, 1, '2009-08-27 00:19:52.406201') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:53.446391', '2009-08-27 00:19:53.444947', 90.05, 1, '2009-08-27 00:19:53.446391') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:54.485431', '2009-08-27 00:19:54.484105', 90.05, 1, '2009-08-27 00:19:54.485431') RETURNING "id"[0m
+  [4;36;1mSQL (61.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:55.525779', '2009-08-27 00:19:55.524363', 90.05, 1, '2009-08-27 00:19:55.525779') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (1.1ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:56.581802', '2009-08-27 00:19:56.579913', 90.05, 1, '2009-08-27 00:19:56.581802') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:57.619226', '2009-08-27 00:19:57.617990', 90.05, 1, '2009-08-27 00:19:57.619226') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:58.659562', '2009-08-27 00:19:58.658224', 90.05, 1, '2009-08-27 00:19:58.659562') RETURNING "id"[0m
+  [4;36;1mSQL (26.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:19:59.699380', '2009-08-27 00:19:59.698021', 90.05, 1, '2009-08-27 00:19:59.699380') RETURNING "id"[0m
+  [4;36;1mSQL (37.9ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:00.739202', '2009-08-27 00:20:00.737790', 90.05, 1, '2009-08-27 00:20:00.739202') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:20:01) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:19:47 -0500", "start"=>"2009-08-24 19:19:47 -0500"}}
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:28:in `index'
+  app/controllers/report_controller.rb:13:in `index'
+
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:01.777883', '2009-08-27 00:20:01.776928', 90.05, 1, '2009-08-27 00:20:01.777883') RETURNING "id"[0m
+Rendered rescues/_trace (33.6ms)
+  [4;36;1mSQL (0.5ms)[0m   [0;1mCOMMIT[0m
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:02.818475', '2009-08-27 00:20:02.817161', 90.05, 1, '2009-08-27 00:20:02.818475') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:03.873639', '2009-08-27 00:20:03.872257', 90.05, 1, '2009-08-27 00:20:03.873639') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:20:04) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:19:47 -0500", "start"=>"2009-08-24 19:19:47 -0500"}}
+  [4;35;1mSource Load (1.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:28:in `index'
+  app/controllers/report_controller.rb:13:in `index'
+
+Rendered rescues/_trace (102.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:04.915077', '2009-08-27 00:20:04.913007', 90.05, 1, '2009-08-27 00:20:04.915077') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:05.953777', '2009-08-27 00:20:05.951888', 90.05, 1, '2009-08-27 00:20:05.953777') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (1.1ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:06.993616', '2009-08-27 00:20:06.992263', 90.05, 1, '2009-08-27 00:20:06.993616') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:08.033296', '2009-08-27 00:20:08.031948', 89.92, 1, '2009-08-27 00:20:08.033296') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:09.071717', '2009-08-27 00:20:09.070316', 89.92, 1, '2009-08-27 00:20:09.071717') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:10.112412', '2009-08-27 00:20:10.111051', 90.05, 1, '2009-08-27 00:20:10.112412') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:11.167678', '2009-08-27 00:20:11.166109', 89.92, 1, '2009-08-27 00:20:11.167678') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:12.206608', '2009-08-27 00:20:12.205066', 90.05, 1, '2009-08-27 00:20:12.206608') RETURNING "id"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:13.247322', '2009-08-27 00:20:13.245309', 90.05, 1, '2009-08-27 00:20:13.247322') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:14.285542', '2009-08-27 00:20:14.283932', 90.05, 1, '2009-08-27 00:20:14.285542') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing SourcesController#index (for 127.0.0.1 at 2009-08-26 19:20:14) [GET]
+  [4;36;1mSource Load (1.8ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 14ms (View: 7, DB: 2) | 200 OK [http://localhost/sources]
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:15.324732', '2009-08-27 00:20:15.323404', 90.05, 1, '2009-08-27 00:20:15.324732') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:16.364319', '2009-08-27 00:20:16.362453', 89.92, 1, '2009-08-27 00:20:16.364319') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SourcesController#edit (for 127.0.0.1 at 2009-08-26 19:20:16) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 1) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 16ms (View: 6, DB: 1) | 200 OK [http://localhost/sources/1/edit]
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:17.420308', '2009-08-27 00:20:17.419078', 89.92, 1, '2009-08-27 00:20:17.420308') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:18.460397', '2009-08-27 00:20:18.458985', 89.92, 1, '2009-08-27 00:20:18.460397') RETURNING "id"[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:19.499383', '2009-08-27 00:20:19.497745', 89.92, 1, '2009-08-27 00:20:19.499383') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing SourcesController#update (for 127.0.0.1 at 2009-08-26 19:20:20) [PUT]
+  Parameters: {"commit"=>"Update", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "id"=>"1", "source"=>{"name"=>"ds_reader"}}
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSource Update (0.6ms)[0m   [0;1mUPDATE "sources" SET "name" = E'ds_reader', "updated_at" = '2009-08-27 00:20:20.033474' WHERE "id" = 1[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/sources/1
+Completed in 22ms (DB: 3) | 302 Found [http://localhost/sources/1]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing SourcesController#show (for 127.0.0.1 at 2009-08-26 19:20:20) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 1) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 14ms (View: 4, DB: 1) | 200 OK [http://localhost/sources/1]
+  [4;35;1mSource Load (0.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "created_at") VALUES(E'ds_reader2', '2009-08-27 00:20:20.538652', '2009-08-27 00:20:20.538652') RETURNING "id"[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:20.542529', '2009-08-27 00:20:20.541205', 90.05, 2, '2009-08-27 00:20:20.542529') RETURNING "id"[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:21.577681', '2009-08-27 00:20:21.576324', 89.92, 2, '2009-08-27 00:20:21.577681') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:22.619007', '2009-08-27 00:20:22.617490', 89.92, 2, '2009-08-27 00:20:22.619007') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:23.658086', '2009-08-27 00:20:23.656464', 90.05, 2, '2009-08-27 00:20:23.658086') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:20:23) [GET]
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering report/index
+Completed in 13ms (View: 2, DB: 0) | 200 OK [http://localhost/report]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:20:24) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:20:23 -0500", "start"=>"2009-08-24 19:20:23 -0500"}}
+  [4;35;1mSource Load (2.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+  [4;36;1mFahrenheitTemp Load (48.7ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 1 and sampled_at > '2009-08-25 00:20:23.000000' and sampled_at < '2009-08-27 00:20:23.000000') ORDER BY sampled_at[0m
+Completed in 87ms (View: 1, DB: 51) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A20%3A23+-0500&report_parameters%5Bstart%5D=2009-08-24+19%3A20%3A23+-0500]
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:24.712491', '2009-08-27 00:20:24.711576', 89.92, 2, '2009-08-27 00:20:24.712491') RETURNING "id"[0m
+  [4;35;1mSQL (40.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:25.752630', '2009-08-27 00:20:25.751297', 89.92, 2, '2009-08-27 00:20:25.752630') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:26.794446', '2009-08-27 00:20:26.792766', 89.92, 2, '2009-08-27 00:20:26.794446') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:27.833221', '2009-08-27 00:20:27.831754', 89.92, 2, '2009-08-27 00:20:27.833221') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:28.871906', '2009-08-27 00:20:28.870587', 89.92, 2, '2009-08-27 00:20:28.871906') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:29.911828', '2009-08-27 00:20:29.910483', 89.92, 2, '2009-08-27 00:20:29.911828') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:30.951900', '2009-08-27 00:20:30.950569', 89.92, 2, '2009-08-27 00:20:30.951900') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:32.007745', '2009-08-27 00:20:32.006204', 89.92, 2, '2009-08-27 00:20:32.007745') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:33.047355', '2009-08-27 00:20:33.045952', 89.92, 2, '2009-08-27 00:20:33.047355') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:34.086937', '2009-08-27 00:20:34.085605', 89.92, 2, '2009-08-27 00:20:34.086937') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:35.126882', '2009-08-27 00:20:35.125518', 89.92, 2, '2009-08-27 00:20:35.126882') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:36.165119', '2009-08-27 00:20:36.163782', 89.92, 2, '2009-08-27 00:20:36.165119') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:37.206360', '2009-08-27 00:20:37.204706', 89.92, 2, '2009-08-27 00:20:37.206360') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:38.244789', '2009-08-27 00:20:38.243258', 89.92, 2, '2009-08-27 00:20:38.244789') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:39.298860', '2009-08-27 00:20:39.298025', 89.92, 2, '2009-08-27 00:20:39.298860') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:40.339049', '2009-08-27 00:20:40.337728', 89.92, 2, '2009-08-27 00:20:40.339049') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:41.380375', '2009-08-27 00:20:41.378517', 89.92, 2, '2009-08-27 00:20:41.380375') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:42.418998', '2009-08-27 00:20:42.417463', 89.92, 2, '2009-08-27 00:20:42.418998') RETURNING "id"[0m
+  [4;35;1mSQL (39.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:43.458771', '2009-08-27 00:20:43.457345', 89.92, 2, '2009-08-27 00:20:43.458771') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:44.497218', '2009-08-27 00:20:44.495901', 89.92, 2, '2009-08-27 00:20:44.497218') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:45.538159', '2009-08-27 00:20:45.536842', 89.92, 2, '2009-08-27 00:20:45.538159') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:46.593256', '2009-08-27 00:20:46.591714', 89.92, 2, '2009-08-27 00:20:46.593256') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:47.633182', '2009-08-27 00:20:47.631848', 89.92, 2, '2009-08-27 00:20:47.633182') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:48.671733', '2009-08-27 00:20:48.670481', 89.92, 2, '2009-08-27 00:20:48.671733') RETURNING "id"[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:49.712399', '2009-08-27 00:20:49.710866', 89.92, 2, '2009-08-27 00:20:49.712399') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:50.751672', '2009-08-27 00:20:50.749835', 89.92, 2, '2009-08-27 00:20:50.751672') RETURNING "id"[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:51.790283', '2009-08-27 00:20:51.788813', 89.92, 2, '2009-08-27 00:20:51.790283') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:52.830085', '2009-08-27 00:20:52.828538', 89.92, 2, '2009-08-27 00:20:52.830085') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:53.885697', '2009-08-27 00:20:53.884408', 89.92, 2, '2009-08-27 00:20:53.885697') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:54.925290', '2009-08-27 00:20:54.923786', 89.92, 2, '2009-08-27 00:20:54.925290') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:55.964903', '2009-08-27 00:20:55.963577', 89.92, 2, '2009-08-27 00:20:55.964903') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:57.004638', '2009-08-27 00:20:57.003309', 89.92, 2, '2009-08-27 00:20:57.004638') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:58.044072', '2009-08-27 00:20:58.042653', 89.92, 2, '2009-08-27 00:20:58.044072') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:20:59.084275', '2009-08-27 00:20:59.082741', 89.92, 2, '2009-08-27 00:20:59.084275') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:00.139593', '2009-08-27 00:21:00.137720', 89.81, 2, '2009-08-27 00:21:00.139593') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:01.177090', '2009-08-27 00:21:01.175794', 89.92, 2, '2009-08-27 00:21:01.177090') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:02.217183', '2009-08-27 00:21:02.215874', 89.92, 2, '2009-08-27 00:21:02.217183') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:03.256697', '2009-08-27 00:21:03.255371', 89.92, 2, '2009-08-27 00:21:03.256697') RETURNING "id"[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:04.296722', '2009-08-27 00:21:04.295357', 89.81, 2, '2009-08-27 00:21:04.296722') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:05.337291', '2009-08-27 00:21:05.335941', 89.92, 2, '2009-08-27 00:21:05.337291') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:06.376464', '2009-08-27 00:21:06.375122', 89.81, 2, '2009-08-27 00:21:06.376464') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:07.431566', '2009-08-27 00:21:07.430243', 89.92, 2, '2009-08-27 00:21:07.431566') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:08.471499', '2009-08-27 00:21:08.470259', 89.81, 2, '2009-08-27 00:21:08.471499') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:09.510809', '2009-08-27 00:21:09.509395', 89.81, 2, '2009-08-27 00:21:09.510809') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:10.549602', '2009-08-27 00:21:10.548290', 89.81, 2, '2009-08-27 00:21:10.549602') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:11.589775', '2009-08-27 00:21:11.588445', 89.81, 2, '2009-08-27 00:21:11.589775') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:12.629846', '2009-08-27 00:21:12.628431', 89.92, 2, '2009-08-27 00:21:12.629846') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:13.685481', '2009-08-27 00:21:13.684067', 89.81, 2, '2009-08-27 00:21:13.685481') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:14.724357', '2009-08-27 00:21:14.722821', 89.81, 2, '2009-08-27 00:21:14.724357') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:15.763652', '2009-08-27 00:21:15.762317', 89.81, 2, '2009-08-27 00:21:15.763652') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:16.803463', '2009-08-27 00:21:16.801913', 89.81, 2, '2009-08-27 00:21:16.803463') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:17.842751', '2009-08-27 00:21:17.841421', 89.92, 2, '2009-08-27 00:21:17.842751') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:18.882143', '2009-08-27 00:21:18.880848', 89.92, 2, '2009-08-27 00:21:18.882143') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:19.921792', '2009-08-27 00:21:19.920297', 89.81, 2, '2009-08-27 00:21:19.921792') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:20.976990', '2009-08-27 00:21:20.975456', 89.81, 2, '2009-08-27 00:21:20.976990') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:22.016491', '2009-08-27 00:21:22.015165', 89.92, 2, '2009-08-27 00:21:22.016491') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:23.056890', '2009-08-27 00:21:23.055111', 89.81, 2, '2009-08-27 00:21:23.056890') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:24.100698', '2009-08-27 00:21:24.099437', 89.81, 2, '2009-08-27 00:21:24.100698') RETURNING "id"[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSource Load (1.6ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:21:42.843929', '2009-08-27 00:21:42.790822', 89.6, 2, '2009-08-27 00:21:42.843929') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:22:43.787802', '2009-08-27 00:22:43.786420', 89.47, 2, '2009-08-27 00:22:43.787802') RETURNING "id"[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSource Load (2.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:23:11.116053', '2009-08-27 00:23:11.062491', 89.47, 2, '2009-08-27 00:23:11.116053') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:24:11.070391', '2009-08-27 00:24:11.068981', 89.6, 2, '2009-08-27 00:24:11.070391') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:25:11.106745', '2009-08-27 00:25:11.105392', 89.6, 2, '2009-08-27 00:25:11.106745') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:26:11.144654', '2009-08-27 00:26:11.143093', 89.6, 2, '2009-08-27 00:26:11.144654') RETURNING "id"[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:27:11.182187', '2009-08-27 00:27:11.180639', 89.47, 2, '2009-08-27 00:27:11.182187') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:28:11.236190', '2009-08-27 00:28:11.234619', 89.36, 2, '2009-08-27 00:28:11.236190') RETURNING "id"[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:29:11.272764', '2009-08-27 00:29:11.271656', 89.25, 2, '2009-08-27 00:29:11.272764') RETURNING "id"[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:30:11.310092', '2009-08-27 00:30:11.308738', 89.25, 2, '2009-08-27 00:30:11.310092') RETURNING "id"[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:31:11.348412', '2009-08-27 00:31:11.347074', 89.15, 2, '2009-08-27 00:31:11.348412') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:32:11.389434', '2009-08-27 00:32:11.387878', 89.15, 2, '2009-08-27 00:32:11.389434') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:33:11.430690', '2009-08-27 00:33:11.429306', 88.7, 2, '2009-08-27 00:33:11.430690') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:34:11.472381', '2009-08-27 00:34:11.471036', 88.7, 2, '2009-08-27 00:34:11.472381') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:35:00) [GET]
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+defaulting report start to 2 days ago
+defaulting report end to now
+Redirected to http://localhost:3000/404.html
+Completed in 17ms (DB: 1) | 404 Not Found [http://localhost/report]
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:35:11.510311', '2009-08-27 00:35:11.508805', 89.02, 2, '2009-08-27 00:35:11.510311') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:35:35) [GET]
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+defaulting report start to 2 days ago
+defaulting report end to now
+Redirected to http://localhost:3000/404.html
+Completed in 14ms (DB: 1) | 302 Found [http://localhost/report]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:36:00) [GET]
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering /404.html (not_found)
+
+ActionView::MissingTemplate (Missing template /404.html in view path app/views):
+  app/controllers/report_controller.rb:14:in `index'
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:36:11.560206', '2009-08-27 00:36:11.558860', 89.02, 2, '2009-08-27 00:36:11.560206') RETURNING "id"[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:37:11.595683', '2009-08-27 00:37:11.594085', 88.7, 2, '2009-08-27 00:37:11.595683') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:37:39) [GET]
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering /Users/edebill/Desktop/data_logger/public/404.html (not_found)
+Completed in 17ms (View: 3, DB: 1) | 404 Not Found [http://localhost/report]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:37:55) [GET]
+  Parameters: {"source"=>"ds_reader2"}
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering report/index
+Completed in 18ms (View: 2, DB: 2) | 200 OK [http://localhost/report?source=ds_reader2]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:37:55) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:37:55 -0500", "start"=>"2009-08-24 19:37:55 -0500", "source"=>"ds_reader2"}}
+  [4;36;1mSource Load (2.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+
+ActiveRecord::UnknownAttributeError (unknown attribute: source):
+  app/controllers/report_controller.rb:4:in `new'
+  app/controllers/report_controller.rb:4:in `index'
+
+Rendered rescues/_trace (40.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:38:01) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:37:55 -0500", "start"=>"2009-08-24 19:37:55 -0500", "source"=>"ds_reader2"}}
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" IS NULL) LIMIT 1[0m
+
+ActiveRecord::UnknownAttributeError (unknown attribute: source):
+  app/controllers/report_controller.rb:4:in `new'
+  app/controllers/report_controller.rb:4:in `index'
+
+Rendered rescues/_trace (29.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:38:11.645624', '2009-08-27 00:38:11.644106', 88.46, 2, '2009-08-27 00:38:11.645624') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:39:11.675933', '2009-08-27 00:39:11.674571', 88.46, 2, '2009-08-27 00:39:11.675933') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:40:11.732678', '2009-08-27 00:40:11.731079', 88.25, 2, '2009-08-27 00:40:11.732678') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mALTER TABLE "report_parameters" ADD COLUMN "source" character varying(255)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090827003958')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:40:44) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:37:55 -0500", "start"=>"2009-08-24 19:37:55 -0500", "source"=>"ds_reader2"}}
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:32:in `index'
+  app/controllers/report_controller.rb:16:in `index'
+
+Rendered rescues/_trace (89.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:40:46) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:37:55 -0500", "start"=>"2009-08-24 19:37:55 -0500", "source"=>"ds_reader2"}}
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:32:in `index'
+  app/controllers/report_controller.rb:16:in `index'
+
+Rendered rescues/_trace (37.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:40:59) [GET]
+  Parameters: {"report_parameters"=>{"source"=>"ds_reader2"}}
+defaulting report start to 2 days ago
+defaulting report end to now
+Rendering report/index
+Completed in 14ms (View: 2, DB: 0) | 200 OK [http://localhost/report?report_parameters[source]=ds_reader2]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:40:59) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:40:59 -0500", "start"=>"2009-08-24 19:40:59 -0500", "source"=>"ds_reader2"}}
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:32:in `index'
+  app/controllers/report_controller.rb:16:in `index'
+
+Rendered rescues/_trace (37.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:41:03) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:40:59 -0500", "start"=>"2009-08-24 19:40:59 -0500", "source"=>"ds_reader2"}}
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/report_controller.rb:32:in `index'
+  app/controllers/report_controller.rb:16:in `index'
+
+Rendered rescues/_trace (33.4ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:41:11.763098', '2009-08-27 00:41:11.761774', 88.12, 2, '2009-08-27 00:41:11.763098') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:41:38) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:40:59 -0500", "start"=>"2009-08-24 19:40:59 -0500", "source"=>"ds_reader2"}}
+  [4;36;1mFahrenheitTemp Load (2.8ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 19147550 and sampled_at > '2009-08-25 00:40:59.000000' and sampled_at < '2009-08-27 00:40:59.000000') ORDER BY sampled_at[0m
+
+NoMethodError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.sampled_at):
+  app/controllers/report_controller.rb:123:in `calculate_step_size'
+  app/controllers/report_controller.rb:35:in `index'
+  app/controllers/report_controller.rb:16:in `index'
+
+Rendered rescues/_trace (31.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:42:11.803361', '2009-08-27 00:42:11.801983', 87.8, 2, '2009-08-27 00:42:11.803361') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:42:30) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:40:59 -0500", "start"=>"2009-08-24 19:40:59 -0500", "source"=>"ds_reader2"}}
+  [4;35;1mSource Load (1.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mFahrenheitTemp Load (2.7ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 2 and sampled_at > '2009-08-25 00:40:59.000000' and sampled_at < '2009-08-27 00:40:59.000000') ORDER BY sampled_at[0m
+Completed in 43ms (View: 1, DB: 4) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A40%3A59+-0500&report_parameters%5Bsource%5D=ds_reader2&report_parameters%5Bstart%5D=2009-08-24+19%3A40%3A59+-0500]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:42:34) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:40:59 -0500", "start"=>"2009-08-24 19:40:59 -0500", "source"=>"ds_reader2"}}
+  [4;35;1mSource Load (2.0ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mFahrenheitTemp Load (4.6ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 2 and sampled_at > '2009-08-25 00:40:59.000000' and sampled_at < '2009-08-27 00:40:59.000000') ORDER BY sampled_at[0m
+Completed in 53ms (View: 1, DB: 7) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A40%3A59+-0500&report_parameters%5Bsource%5D=ds_reader2&report_parameters%5Bstart%5D=2009-08-24+19%3A40%3A59+-0500]
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:43:11.855520', '2009-08-27 00:43:11.853713', 87.67, 2, '2009-08-27 00:43:11.855520') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:44:11.890287', '2009-08-27 00:44:11.888752', 87.35, 2, '2009-08-27 00:44:11.890287') RETURNING "id"[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:45:11.929059', '2009-08-27 00:45:11.927720', 86.9, 2, '2009-08-27 00:45:11.929059') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:46:11.966197', '2009-08-27 00:46:11.964851', 86.45, 2, '2009-08-27 00:46:11.966197') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:46:37) [GET]
+  Parameters: {"report_parameters"=>{"source"=>"ds_reader2"}}
+defaulting report start to 2 days ago
+defaulting report end to now
+  [4;35;1mSource Load (1.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+Rendering report/index
+Completed in 20ms (View: 2, DB: 2) | 200 OK [http://localhost/report?report_parameters[source]=ds_reader2]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:46:38) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:46:38 -0500", "start"=>"2009-08-24 19:46:38 -0500", "source"=>"ds_reader2"}}
+  [4;36;1mSource Load (1.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mFahrenheitTemp Load (3.9ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 2 and sampled_at > '2009-08-25 00:46:38.000000' and sampled_at < '2009-08-27 00:46:38.000000') ORDER BY sampled_at[0m
+Completed in 63ms (View: 1, DB: 6) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A46%3A38+-0500&report_parameters%5Bsource%5D=ds_reader2&report_parameters%5Bstart%5D=2009-08-24+19%3A46%3A38+-0500]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:46:43) [GET]
+  Parameters: {"report_parameters"=>{"source"=>"ds_reader"}}
+defaulting report start to 2 days ago
+defaulting report end to now
+  [4;36;1mSource Load (1.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+Rendering report/index
+Completed in 19ms (View: 2, DB: 2) | 200 OK [http://localhost/report?report_parameters[source]=ds_reader]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:46:43) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:46:43 -0500", "start"=>"2009-08-24 19:46:43 -0500", "source"=>"ds_reader"}}
+  [4;35;1mSource Load (1.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader') LIMIT 1[0m
+  [4;36;1mFahrenheitTemp Load (4.7ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 1 and sampled_at > '2009-08-25 00:46:43.000000' and sampled_at < '2009-08-27 00:46:43.000000') ORDER BY sampled_at[0m
+Completed in 47ms (View: 1, DB: 6) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A46%3A43+-0500&report_parameters%5Bsource%5D=ds_reader&report_parameters%5Bstart%5D=2009-08-24+19%3A46%3A43+-0500]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:46:49) [GET]
+  Parameters: {"report_parameters"=>{"source"=>"ds_reader2"}}
+defaulting report start to 2 days ago
+defaulting report end to now
+  [4;35;1mSource Load (1.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+Rendering report/index
+Completed in 18ms (View: 2, DB: 2) | 200 OK [http://localhost/report?report_parameters[source]=ds_reader2]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:46:49) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:46:49 -0500", "start"=>"2009-08-24 19:46:49 -0500", "source"=>"ds_reader2"}}
+  [4;36;1mSource Load (1.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mFahrenheitTemp Load (5.7ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 2 and sampled_at > '2009-08-25 00:46:49.000000' and sampled_at < '2009-08-27 00:46:49.000000') ORDER BY sampled_at[0m
+Completed in 55ms (View: 1, DB: 8) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A46%3A49+-0500&report_parameters%5Bsource%5D=ds_reader2&report_parameters%5Bstart%5D=2009-08-24+19%3A46%3A49+-0500]
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:47:12.019771', '2009-08-27 00:47:12.018413', 86.32, 2, '2009-08-27 00:47:12.019771') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:48:12.053135', '2009-08-27 00:48:12.051717', 86.21, 2, '2009-08-27 00:48:12.053135') RETURNING "id"[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:49:12.101238', '2009-08-27 00:49:12.099765', 85.87, 2, '2009-08-27 00:49:12.101238') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:50:12.137634', '2009-08-27 00:50:12.136289', 86.1, 2, '2009-08-27 00:50:12.137634') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:51:12.171655', '2009-08-27 00:51:12.169653', 86.1, 2, '2009-08-27 00:51:12.171655') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:52:12.220109', '2009-08-27 00:52:12.218495', 86.0, 2, '2009-08-27 00:52:12.220109') RETURNING "id"[0m
+  [4;35;1mSQL (373.5ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO "fahrenheit_temps" ("updated_at", "sampled_at", "temp", "source_id", "created_at") VALUES('2009-08-27 00:53:12.252920', '2009-08-27 00:53:12.251566', 86.0, 2, '2009-08-27 00:53:12.252920') RETURNING "id"[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-26 19:53:18) [GET]
+  Parameters: {"report_parameters"=>{"source"=>"ds_reader2"}}
+defaulting report start to 2 days ago
+defaulting report end to now
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+Rendering report/index
+Completed in 20ms (View: 2, DB: 2) | 200 OK [http://localhost/report?report_parameters[source]=ds_reader2]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-26 19:53:18) [GET]
+  Parameters: {"report_parameters"=>{"end"=>"2009-08-26 19:53:18 -0500", "start"=>"2009-08-24 19:53:18 -0500", "source"=>"ds_reader2"}}
+  [4;35;1mSource Load (4.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."name" = E'ds_reader2') LIMIT 1[0m
+  [4;36;1mFahrenheitTemp Load (3.2ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 2 and sampled_at > '2009-08-25 00:53:18.000000' and sampled_at < '2009-08-27 00:53:18.000000') ORDER BY sampled_at[0m
+Completed in 64ms (View: 1, DB: 8) | 200 OK [http://localhost/report?format=json&report_parameters%5Bend%5D=2009-08-26+19%3A53%3A18+-0500&report_parameters%5Bsource%5D=ds_reader2&report_parameters%5Bstart%5D=2009-08-24+19%3A53%3A18+-0500]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mALTER TABLE "report_parameters" ADD COLUMN "source" character varying(255)[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090827003958')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateReportSources (20090829141507)
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (8.1ms)[0m   [0;1mCREATE TABLE "report_sources" ("id" serial primary key, "report_id" integer, "source_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (2.3ms)[0m   [0mCREATE INDEX "index_report_sources_on_report_id" ON "report_sources" ("report_id")[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mCREATE INDEX "index_report_sources_on_source_id" ON "report_sources" ("source_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090829141507')[0m
+  [4;36;1mSQL (1.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+Migrating to CreateReportSources (20090829141507)
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateReportSources (20090829141507)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (3.9ms)[0m   [0mDROP TABLE "report_sources"[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateReportSources (20090829141507)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mDROP TABLE "report_sources"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPGError: ERROR: column "source" of relation "report_parameters" already exists
+: ALTER TABLE "report_parameters" ADD COLUMN "source" character varying(255)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+Migrating to CreateReportSources (20090829141507)
+Migrating to RenameReportParameters (20090829142924)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mALTER TABLE "report_parameters" RENAME TO "reports"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090829142924')[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to RenameReportParameters (20090829142924)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mALTER TABLE "reports" RENAME TO "report_parameters"[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20090829142924'[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+Migrating to CreateReportSources (20090829141507)
+Migrating to RenameReportParameters (20090829142924)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mALTER TABLE "report_parameters" RENAME TO "reports"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090829142924')[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to RenameReportParameters (20090829142924)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mALTER TABLE "reports" RENAME TO "report_parameters"[0m
+  [4;36;1mSQL (1.6ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20090829142924'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20090630005902)
+Migrating to CreateTimePeriods (20090630010143)
+Migrating to CreateFahrenheitTemps (20090730022539)
+Migrating to AddLoggedAtToFahrenheitTemp (20090802175653)
+Migrating to CreateReportParameters (20090817025242)
+Migrating to AddSourceToReportParameters (20090827003958)
+Migrating to CreateReportSources (20090829141507)
+Migrating to RenameReportParameters (20090829142924)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mALTER TABLE "report_parameters" RENAME TO "reports"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090829142924')[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSource Load (1.2ms)[0m   [0;1mSELECT * FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:03:14) [GET]
+
+NameError (uninitialized constant ReportController::Sources):
+  app/controllers/report_controller.rb:4:in `index'
+
+Rendered rescues/_trace (30.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:03:32) [GET]
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (undefined method `merge' for #<Array:0x246f030>) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.select :report, :sources, @sources.collect {|s| [s.name, s.id]} %>
+11:   <% end %> 
+12:   <%= submit_tag 'submit' %>
+13: <% end %>
+
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (40.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:05:49) [GET]
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (no block given) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.select :report, :sources, @sources.each.collect {|s| [s.name, s.id]} %>
+11:   <% end %> 
+12:   <%= submit_tag 'submit' %>
+13: <% end %>
+
+    app/views/report/index.html.erb:10:in `each'
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:10:31) [GET]
+  [4;35;1mSource Load (1.5ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (no block given) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.select :report, :sources, @sources.each.collect {|s| [s.name, s.id]} %>
+11:   <% end %> 
+12:   <%= submit_tag 'submit' %>
+13: <% end %>
+
+    app/views/report/index.html.erb:10:in `each'
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.5ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:10:33) [GET]
+  [4;36;1mSource Load (1.4ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (no block given) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.select :report, :sources, @sources.each.collect {|s| [s.name, s.id]} %>
+11:   <% end %> 
+12:   <%= submit_tag 'submit' %>
+13: <% end %>
+
+    app/views/report/index.html.erb:10:in `each'
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:10:58) [GET]
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (undefined method `merge' for #<Array:0x2429df0>) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.select :report, :sources, 
+11:              @sources.collect {|s| [s.name, s.id]} %>
+12:   <% end %> 
+13:   <%= submit_tag 'submit' %>
+
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.9ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:12:25) [GET]
+  [4;36;1mSource Load (1.5ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (undefined method `merge' for :name:Symbol) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.collection_select :report, :sources, 
+11:              @sources, :id, :name %>
+12:   <% end %> 
+13:   <%= submit_tag 'submit' %>
+
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.8ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:12:29) [GET]
+  [4;35;1mSource Load (1.5ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (undefined method `merge' for :name:Symbol) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.collection_select :report, :sources, 
+11:              @sources, :id, :name %>
+12:   <% end %> 
+13:   <%= submit_tag 'submit' %>
+
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (37.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:12:38) [GET]
+  [4;36;1mSource Load (1.7ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+
+ActionView::TemplateError (undefined method `merge' for :name:Symbol) on line #10 of app/views/report/index.html.erb:
+7:   <%= f.text_field :end %>
+8:   <% f.fields_for :sources do |sf| %>
+9:     <%= sf.label :name, "source" %>
+10:     <%= sf.collection_select :report, :sources, 
+11:              @sources, :id, :name, {} %>
+12:   <% end %> 
+13:   <%= submit_tag 'submit' %>
+
+    app/views/report/index.html.erb:10
+    app/views/report/index.html.erb:8
+    app/views/report/index.html.erb:1
+
+Rendered rescues/_trace (38.4ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:13:33) [GET]
+  [4;35;1mSource Load (1.5ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+Completed in 70ms (View: 54, DB: 2) | 200 OK [http://localhost/report]
+  [4;36;1mSQL (1.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:14:06) [GET]
+  [4;36;1mSource Load (1.4ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+Completed in 24ms (View: 9, DB: 3) | 200 OK [http://localhost/report]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:14:09) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>"4", "start"=>"2009-08-27 10:14:06 -0500"}}
+
+ActiveRecord::AssociationTypeMismatch (Source(#18487710) expected, got String(#113650)):
+  app/controllers/report_controller.rb:9:in `new'
+  app/controllers/report_controller.rb:9:in `show'
+
+Rendered rescues/_trace (95.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:16:19) [GET]
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+Completed in 25ms (View: 10, DB: 2) | 200 OK [http://localhost/report]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index (for 127.0.0.1 at 2009-08-29 10:17:20) [GET]
+  [4;36;1mSource Load (1.5ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/index
+Completed in 25ms (View: 10, DB: 2) | 200 OK [http://localhost/report]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:17:31) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+
+ActiveRecord::AssociationTypeMismatch (Source(#18877260) expected, got String(#113650)):
+  app/controllers/report_controller.rb:9:in `new'
+  app/controllers/report_controller.rb:9:in `show'
+
+Rendered rescues/_trace (34.8ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:18:52) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.collect):
+  app/controllers/report_controller.rb:9:in `show'
+
+Rendered rescues/_trace (28.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:20:01) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+
+
+ActiveRecord::AssociationTypeMismatch (Source(#19192620) expected, got String(#113650)):
+  app/controllers/report_controller.rb:14:in `new'
+  app/controllers/report_controller.rb:14:in `show'
+
+Rendered rescues/_trace (35.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:20:37) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+45
+
+ActiveRecord::AssociationTypeMismatch (Source(#18681330) expected, got String(#113650)):
+  app/controllers/report_controller.rb:14:in `new'
+  app/controllers/report_controller.rb:14:in `show'
+
+Rendered rescues/_trace (96.5ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:21:00) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+  [4;35;1mSource Load (1.1ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;35;1mSQL (2.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/show
+Completed in 45ms (View: 4, DB: 7) | 200 OK [http://localhost/report/show]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-29 10:21:00) [GET]
+  Parameters: {"report_parameters"=>""}
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+
+ActionView::MissingTemplate (Missing template report/index.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:22:15) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+  [4;36;1mSource Load (1.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;35;1mSource Load (3.8ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/show
+Completed in 38ms (View: 2, DB: 7) | 200 OK [http://localhost/report/show]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-29 10:22:15) [GET]
+  Parameters: {"report_parameters"=>""}
+  [4;35;1mSource Load (2.9ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+
+ActionView::MissingTemplate (Missing template report/index.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:22:47) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;35;1mSource Load (3.0ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/show
+Completed in 39ms (View: 3, DB: 6) | 200 OK [http://localhost/report/show]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#index to json (for 127.0.0.1 at 2009-08-29 10:22:47) [GET]
+  Parameters: {"report_parameters"=>""}
+  [4;35;1mSource Load (1.6ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+
+ActionView::MissingTemplate (Missing template report/index.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:24:56) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+  [4;36;1mSource Load (1.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;35;1mSource Load (2.6ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/show
+Completed in 43ms (View: 2, DB: 6) | 200 OK [http://localhost/report/show]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show to json (for 127.0.0.1 at 2009-08-29 10:24:56) [GET]
+  Parameters: {"report_parameters"=>""}
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.[]):
+  app/controllers/report_controller.rb:11:in `show'
+
+Rendered rescues/_trace (37.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show to json (for 127.0.0.1 at 2009-08-29 10:25:00) [GET]
+  Parameters: {"report_parameters"=>""}
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.[]):
+  app/controllers/report_controller.rb:11:in `show'
+
+Rendered rescues/_trace (29.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#show to json (for 127.0.0.1 at 2009-08-29 10:26:48) [GET]
+  Parameters: {"report_parameters"=>""}
+
+SyntaxError (/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:32: syntax error, unexpected ')', expecting '}'
+...t.sources.collect {|s| s.id }))
+                              ^
+/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:126: syntax error, unexpected kEND, expecting '}'
+/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:149: syntax error, unexpected kEND, expecting '}'):
+  
+
+Rendered rescues/_trace (36.5ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#show (for 127.0.0.1 at 2009-08-29 10:26:53) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+
+SyntaxError (/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:32: syntax error, unexpected ')', expecting '}'
+...t.sources.collect {|s| s.id }))
+                              ^
+/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:126: syntax error, unexpected kEND, expecting '}'
+/Users/edebill/Desktop/data_logger/app/controllers/report_controller.rb:149: syntax error, unexpected kEND, expecting '}'):
+  
+
+Rendered rescues/_trace (27.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show (for 127.0.0.1 at 2009-08-29 10:27:20) [POST]
+  Parameters: {"commit"=>"submit", "authenticity_token"=>"eVxmLLS7wHgnNdODIL3rtDZLhJTqKIXs8UZ0r0kYPKU=", "report"=>{"end"=>"", "sources"=>["4", "5"], "start"=>"2009-08-27 10:17:20 -0500"}}
+  [4;35;1mSource Load (1.0ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSource Load (1.4ms)[0m   [0mSELECT * FROM "sources" ORDER BY name[0m
+Rendering report/show
+Completed in 35ms (View: 3, DB: 4) | 200 OK [http://localhost/report/show]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ReportController#show to json (for 127.0.0.1 at 2009-08-29 10:27:21) [GET]
+  Parameters: {"report"=>{"end"=>"", "start"=>"2009-08-27 10:17:20 -0500", "sources"=>["4", "5"]}}
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 4) [0m
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 5) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSource Load (1.0ms)[0m   [0;1mSELECT * FROM "sources" ORDER BY name[0m
+  [4;35;1mFahrenheitTemp Load (34.5ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE (source_id = 4 and sampled_at > '2009-08-27 15:17:20.000000' and sampled_at < '2009-08-29 10:27:21.059073') ORDER BY sampled_at[0m
+Completed in 794ms (View: 1, DB: 38) | 200 OK [http://localhost/report/show?format=json&report%5Bend%5D=&report%5Bsources%5D%5B%5D=4&report%5Bsources%5D%5B%5D=5&report%5Bstart%5D=2009-08-27+10%3A17%3A20+-0500]
