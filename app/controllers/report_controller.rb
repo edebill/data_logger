@@ -37,7 +37,7 @@ class ReportController < ApplicationController
 
         data1 = []
 
-        report_end = @report.end || Time.now
+        report_end = @report.end || Time.now.utc
         temps = FahrenheitTemp.find(:all,
                                     :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', @source.id,  @report.start, report_end],
                                     :order => :sampled_at)
@@ -82,7 +82,7 @@ class ReportController < ApplicationController
           if(t_count > 0)
             data1 << t_total / t_count
           else
-            data1 << 0
+            data1 << nil
           end
 
           step_time = next_step
