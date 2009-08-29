@@ -168,6 +168,7 @@ class ReportController < ApplicationController
     temps.each do |source|
       logger.debug("checking highest and lowest for #{source[:source].name}")
       t = source[:readings]
+      next if t.blank?
       by_temp = t.sort { |x, y| x.temp <=> y.temp }
       logger.debug("#{by_temp[0].temp} - #{by_temp[-1].temp}")
       if lowest == nil || by_temp[0].temp < lowest
