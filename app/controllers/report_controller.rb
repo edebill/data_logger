@@ -184,10 +184,11 @@ class ReportController < ApplicationController
   
   def calculate_graph_data_for_source(temps, first_time, last_reading, step_size)
     data = []
-    total = 0.0
-    count = nil
 
     step_through_times(first_time, last_reading, step_size) do |this_step, next_step, step_no|
+
+      total = 0.0
+      count = nil
       temps.each do |t|
         if t.sampled_at > this_step && t.sampled_at <= next_step
           total += t.temp
