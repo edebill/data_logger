@@ -3,11 +3,13 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Temp Offset</th>
   </tr>
 
 <% @sources.each do |source| %>
   <tr>
     <td><%=h source.name %></td>
+    <td><%=h source.temp_offset %></td>
     <td><%= link_to 'Show', source %></td>
     <td><%= link_to 'Edit', edit_source_path(source) %></td>
     <td><%= link_to 'Destroy', source, :confirm => 'Are you sure?', :method => :delete %></td>

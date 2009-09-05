@@ -232,6 +232,10 @@ class ReportController < ApplicationController
                                           :order => :sampled_at) || [],
         :data => []
       }
+      unless temps[-1][:source].temp_offset.blank?
+        offset  = temps[-1][:source].temp_offset
+        temps[-1][:readings].each { |r| r.temp = r.temp + offset } 
+      end
     end
     return temps
   end
