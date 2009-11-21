@@ -32,6 +32,10 @@ OneWire ds(10);  // on pin 10
 int nint;
 volatile boolean f_wdt=1;
 
+// storage for the temperature we get from the sensor
+int sign_bit;     // what's your sign?
+int reading[2];  // [0] is whole, [1] is fraction
+
 
 int ds_found = 0;
 byte addr[8];
@@ -81,6 +85,8 @@ void setup(void) {
 }
 
 void loop(void) {
+  int *reading;
+
   if (f_wdt==1) {  // wait for timed out watchdog / flag is set when a watchdog timeout occurs
     f_wdt=0;       // reset flag
 
@@ -90,7 +96,13 @@ void loop(void) {
 
       xbee_wake();
       Serial.begin(9600);
-      record_data();
+      if(read_data()){
+	transmit_data();
+      } else {
+	Serial.print(source);
+	Serial.print(" - error reading sensor");
+      }
+
       delay(5);               // wait until the last serial character is send
       xbee_sleep();
     }
@@ -113,9 +125,9 @@ void xbee_sleep(){
 }
 
 
-void record_data(){
+int read_data(){
 
-  int HighByte, LowByte, TReading, SignBit, Tc_100, Whole, Fract, Tf_100;
+  int HighByte, LowByte, TReading, Tc_100, Tf_100;
 
   if ( ds.search(addr) ){
     ds_found = 1;
@@ -132,31 +144,17 @@ void record_data(){
   if ( ds_found != 1 ){
     Serial.print("no oneWire devices found");
     delay(1000);
-    return;
+    return 0;
   }
 
-  //  Serial.print("R=");
-  //for( i = 0; i < 8; i++) {
-  //  Serial.print(addr[i], HEX);
-  //  Serial.print(" ");
-  //}
-
-  //if ( OneWire::crc8( addr, 7) != addr[7]) {
-  //    Serial.print("CRC is not valid!\n");
-  //    return;
-  //}
-  //Serial.print("addr 0 = ");
-  //char buff[20];
-  //sprintf(buff, "%x", addr[0]);	
-  //Serial.println(buff);
   if ( addr[0] != 0x10 && addr[0] != 0x28) {
      Serial.print("Device is not a DS18S20 family device.\n");
-     return;
+     return 0;
   }
 
   ds.reset();
   ds.select(addr);
-  ds.write(0x44,1);         // start conversion, with parasite power on at the end
+  ds.write(0x44,1);         // start conversion
 
   delay(1000);     // maybe 750ms is enough, maybe not
   // we might do a ds.depower() here, but the reset will take care of it.
@@ -168,28 +166,36 @@ void record_data(){
   for ( i = 0; i < 9; i++) {           // we need 9 bytes
     data[i] = ds.read();
   }
+
+  if( ! OneWire::crc8( data, 8) == data[9]){
+    return 0;
+  }
   
   LowByte = data[0];
   HighByte = data[1];
   TReading = (HighByte << 8) + LowByte;
-  SignBit = TReading & 0x8000;  // test most sig bit
-  if (SignBit) // negative
+  sign_bit = TReading & 0x8000;  // test most sig bit
+  if (sign_bit) // negative
   {
     TReading = (TReading ^ 0xffff) + 1; // 2's comp
   }
   Tc_100 = (6 * TReading) + TReading / 4;    // multiply by (100 * 0.0625) or 6.25
   Tf_100 = (Tc_100 * 9 / 5)   + 3200;
 
-  Whole = Tf_100 / 100;  // separate off the whole and fractional portions
-  Fract = Tf_100 % 100;
+  reading[0] = Tf_100 / 100;  // separate off the whole and fractional portions
+  reading[1] = Tf_100 % 100;
 
+  return 1;
+}
 
+void transmit_data() {
   char buff[10];
-  if (SignBit) // If its negative
+
+  if (sign_bit) // If its negative
   {
-     sprintf(buff, "-%d.%02d", Whole, Fract);
+     sprintf(buff, "-%d.%02d", reading[0], reading[1]);
   } else {
-     sprintf(buff, "%d.%02d", Whole, Fract);
+     sprintf(buff, "%d.%02d", reading[0], reading[1]);
   }
 
   log_temperature("T", source, buff);
