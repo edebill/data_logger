@@ -10,7 +10,7 @@
 OneWire ds(10);  // on pin 10
 
 //  how do we identify ourselves to the logging application?
-#define source "back porch"
+#define source "bedroom"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -26,7 +26,7 @@ OneWire ds(10);  // on pin 10
 #endif
 
 #ifndef HAVE_XBEE_SLEEP
-//#define HAVE_XBEE_SLEEP
+#define HAVE_XBEE_SLEEP
 #endif
 
 //  for our sleep
@@ -108,7 +108,7 @@ void loop(void) {
 	transmit_data();
       } else {
 	Serial.print(source);
-	Serial.print(" - error reading sensor");
+	Serial.println(" - error reading sensor");
 
 	if(read_data()){  // retry.  If we're lucky it was a transient error
 	  transmit_data();
@@ -245,7 +245,10 @@ void send_msg(char *type, char *source_name, char *data, char *crchex) {
 int check_for_receipt(char * crcstring) {
   char receipt[50];
   int charno = 0;
+
   delay(100);  // give ourselves a little delay
+  delay(100);
+
   while(Serial.available() > 0 && charno < 49){
     charno++;
     receipt[charno - 1] = Serial.read();
