@@ -101,6 +101,10 @@ void loop(void) {
       } else {
 	Serial.print(source);
 	Serial.print(" - error reading sensor");
+
+	if(read_data()){  // retry.  If we're lucky it was a transient error
+	  transmit_data();
+	}
       }
 
       delay(5);               // wait until the last serial character is send
