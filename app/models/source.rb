@@ -5,7 +5,7 @@ class Source < ActiveRecord::Base
   validates_numericality_of :temp_offset, :only_integer => false
 
   def self.get(name)
-    self.find_by_name(name) || self.new(:name => name)
+    self.find_by_name(name) || self.new(:name => name, :temp_offset => 0)
   end
 
 end

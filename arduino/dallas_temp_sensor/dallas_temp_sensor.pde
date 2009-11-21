@@ -10,7 +10,7 @@
 OneWire ds(10);  // on pin 10
 
 //  how do we identify ourselves to the logging application?
-#define source "living room floor"
+#define source "back porch"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -29,7 +29,8 @@ OneWire ds(10);  // on pin 10
 //#define HAVE_XBEE_SLEEP
 #endif
 
-int nint;
+//  for our sleep
+int nint;   // number of interrupts received
 volatile boolean f_wdt=1;
 
 // storage for the temperature we get from the sensor
@@ -37,8 +38,15 @@ int sign_bit;     // what's your sign?
 int reading[2];  // [0] is whole, [1] is fraction
 
 
+// crc for our logging message
+char crchex[5];
+
+
+// helpers for finding the temperature sensor and reading it
 int ds_found = 0;
 byte addr[8];
+
+
 void setup(void) {
   // initialize inputs/outputs
   // start serial port
@@ -91,7 +99,7 @@ void loop(void) {
     f_wdt=0;       // reset flag
 
     nint++;
-    if (nint >= 6) {
+    if (nint >= 6) {  // 6 for ~ 1 minute
       nint = 0;
 
       xbee_wake();
@@ -107,7 +115,7 @@ void loop(void) {
 	}
       }
 
-      delay(5);               // wait until the last serial character is send
+      delay(5);               // wait until the last serial character is sent
       xbee_sleep();
     }
 
@@ -202,23 +210,70 @@ void transmit_data() {
      sprintf(buff, "%d.%02d", reading[0], reading[1]);
   }
 
-  log_temperature("T", source, buff);
+  send_temperature("T", source, buff);
 }
 
 
 
-void log_temperature(char *type, char *source_name, char *temp) {
+// send temperature to server, looking for a receipt message.
+//  try 3 times, then give up
+void send_temperature(char *type, char *source_name, char *data) {
+  int crc = calculate_crc(type, source_name, data);
+  sprintf(crchex, "%04X", crc);
+
+  int try_count = 1;
+  send_msg(type, source_name, data, crchex);
+
+  while( (3 > try_count) &&  (! check_for_receipt(crchex))) {
+
+    send_msg(type, source_name, data, crchex);
+    try_count++;
+  }
+}
+
+void send_msg(char *type, char *source_name, char *data, char *crchex) {
   Serial.print(type);
   Serial.print(":");
   Serial.print(source_name);
   Serial.print(":");
-  Serial.print(temp);
+  Serial.print(data);
   Serial.print(":");
 
-  char crchex[5];
-  int crc = calculate_crc(type, source_name, temp);
-  sprintf(crchex, "%04X", crc);
   Serial.println(crchex);
+}
+
+int check_for_receipt(char * crcstring) {
+  char receipt[50];
+  int charno = 0;
+  delay(100);  // give ourselves a little delay
+  while(Serial.available() > 0 && charno < 49){
+    charno++;
+    receipt[charno - 1] = Serial.read();
+
+    if(receipt[charno - 1] == '\n'){  // end of line
+      receipt[charno - 1] = '\0';  // eat that EOL
+      break;
+    }
+
+    delay(1);  // give time for more characters to come in
+  }
+
+  receipt[charno] = '\0';  // make sure we've got a string terminator
+  //  if(charno > 0){
+  //  Serial.println(receipt);
+  //}
+
+  if(charno >= 6) {
+    if(receipt[0] == 'R') {  // it's a receipt message
+      receipt[6] = '\0';
+
+      if(0 == strcmp(&receipt[2], crcstring)) {
+	return 1;
+      }
+    }
+  }
+
+  return 0;
 }
 
 

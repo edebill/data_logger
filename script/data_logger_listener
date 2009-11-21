@@ -14,6 +14,8 @@ while true
   if e = LogEvent.parse(foo)
     puts e.inspect
     if e.save
+      md = foo.match(/:([^:]+)$/);
+      sp.puts("R:#{md[1]}");
       puts "#{e.class.to_s} #{e.id} saved"
     else
       puts e.errors.full_messages

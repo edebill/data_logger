@@ -20,6 +20,7 @@ class LogEvent
 
         source = Source.get(md[3])
         source.save unless source.id
+
         event.source = source
         event.parse(md[4])
         return event
