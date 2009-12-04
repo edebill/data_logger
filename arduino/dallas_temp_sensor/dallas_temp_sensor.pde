@@ -7,14 +7,14 @@
 
 // DS18S20 Temperature chip i/o
 // can be either parasite powered or conventionally powered
-OneWire ds(10);  // on pin 10
+OneWire ds(11);  // on pin 11
 
 //  how do we identify ourselves to the logging application?
-#define source "bedroom"
+#define source "living room"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
-#define XBEE_PIN 11
+#define XBEE_PIN 8
 
 
 
@@ -26,7 +26,7 @@ OneWire ds(10);  // on pin 10
 #endif
 
 #ifndef HAVE_XBEE_SLEEP
-#define HAVE_XBEE_SLEEP
+//#define HAVE_XBEE_SLEEP
 #endif
 
 //  for our sleep
@@ -37,6 +37,10 @@ volatile boolean f_wdt=1;
 int sign_bit;     // what's your sign?
 int reading[2];  // [0] is whole, [1] is fraction
 
+
+// for timout, waiting for response
+uint16_t wait_start;
+uint16_t wait_end;
 
 // crc for our logging message
 char crchex[5];
@@ -89,7 +93,7 @@ void setup(void) {
   cbi( SMCR,SM2 );     // power down mode
 
   setup_watchdog(9);
-  xbee_sleep();
+//  xbee_sleep();
 }
 
 void loop(void) {
@@ -160,7 +164,9 @@ int read_data(){
   }
 
   if ( addr[0] != 0x10 && addr[0] != 0x28) {
-     Serial.print("Device is not a DS18S20 family device.\n");
+     Serial.println("Device is not a DS18S20 family device.\n");
+     Serial.print("addr[0] = ");
+     Serial.println(addr[0], HEX);  
      return 0;
   }
 
@@ -221,10 +227,14 @@ void send_temperature(char *type, char *source_name, char *data) {
   int crc = calculate_crc(type, source_name, data);
   sprintf(crchex, "%04X", crc);
 
+  empty_input_buffer();
   int try_count = 1;
   send_msg(type, source_name, data, crchex);
 
   while( (3 > try_count) &&  (! check_for_receipt(crchex))) {
+
+    delay(1000);
+    delay(random(1000));
 
     send_msg(type, source_name, data, crchex);
     try_count++;
@@ -246,10 +256,19 @@ int check_for_receipt(char * crcstring) {
   char receipt[50];
   int charno = 0;
 
-  delay(100);  // give ourselves a little delay
-  delay(100);
+  begin_timeout(2000);
+  while( !timeout() && Serial.available() == 0){
 
-  while(Serial.available() > 0 && charno < 49){
+  }
+
+  begin_timeout(500);  // if they've already started, .5 sec should be generous
+  receipt[charno] = '\0';
+
+  while(Serial.available() > 0 && charno < 49
+	&& receipt[charno] != '\r'
+	&& receipt[charno] != '\n'
+	&& !timeout()){
+
     charno++;
     receipt[charno - 1] = Serial.read();
 
@@ -258,13 +277,9 @@ int check_for_receipt(char * crcstring) {
       break;
     }
 
-    delay(1);  // give time for more characters to come in
+    delay(10);  // give time for more characters to come in
   }
-
   receipt[charno] = '\0';  // make sure we've got a string terminator
-  //  if(charno > 0){
-  //  Serial.println(receipt);
-  //}
 
   if(charno >= 6) {
     if(receipt[0] == 'R') {  // it's a receipt message
@@ -299,6 +314,38 @@ uint16_t  crc_string(uint16_t crc, char * crc_message) {
     crc = _crc16_update(crc, crc_message[i]);
   }
   return crc; // must be 0
+}
+
+void  empty_input_buffer() {
+  byte garbage;
+  while(Serial.available() > 0){
+    garbage = Serial.read();
+  }
+  
+  return;
+}
+
+void begin_timeout(uint16_t timeout_period) {
+  wait_start = millis();
+  wait_end = wait_start + timeout_period;
+  
+  return;
+}
+
+int timeout() {
+  uint16_t now;
+  now = millis();
+  if(wait_start < wait_end){  // normal case
+    if( now > wait_end ){
+      return 1;
+    }
+  } else {   // millis() will wrap
+    if( now < wait_start && now > wait_end ){
+      return 1;
+    }
+  }
+
+  return 0;
 }
 
 

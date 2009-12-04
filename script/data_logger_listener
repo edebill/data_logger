@@ -6,6 +6,7 @@ require File.dirname(__FILE__) + '/../config/environment'
 require 'serialport'
 
 sp = SerialPort.new "/dev/tty.usbserial-A6005v1G"
+puts "ready and listening"
 
 while true
   foo = sp.gets
@@ -14,8 +15,9 @@ while true
   if e = LogEvent.parse(foo)
     puts e.inspect
     if e.save
-      md = foo.match(/:([^:]+)$/);
-      sp.puts("R:#{md[1]}");
+      md = foo.match(/:([^:]+)$/)
+      ack = "R:#{md[1]}"
+      sp.puts(ack)
       puts "#{e.class.to_s} #{e.id} saved"
     else
       puts e.errors.full_messages
