@@ -1,16 +1,19 @@
 #include <util/crc16.h>
-#include <OneWire.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 
+// http://milesburton.com/index.php/Dallas_Temperature_Control_Library
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 
 // DS18S20 Temperature chip i/o
 // can be either parasite powered or conventionally powered
-OneWire ds(11);  // on pin 11
+OneWire oneWire(11);  // on pin 11
+DallasTemperature sensors(&oneWire);
 
 //  how do we identify ourselves to the logging application?
-#define source "living room"
+#define source "computer room"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -25,17 +28,19 @@ OneWire ds(11);  // on pin 11
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 #endif
 
+#ifndef HAVE_XBEE
+#define HAVE_XBEE
+#endif
+
+
 #ifndef HAVE_XBEE_SLEEP
-//#define HAVE_XBEE_SLEEP
+#define HAVE_XBEE_SLEEP
 #endif
 
 //  for our sleep
 int nint;   // number of interrupts received
 volatile boolean f_wdt=1;
 
-// storage for the temperature we get from the sensor
-int sign_bit;     // what's your sign?
-int reading[2];  // [0] is whole, [1] is fraction
 
 
 // for timout, waiting for response
@@ -73,8 +78,10 @@ void setup(void) {
   delay(10);
 #endif
 
-  Serial.print(source);
-  Serial.println(" booting");
+  error("booting");
+
+  sensors.begin();
+
   delay(100);
 
   // CPU Sleep Modes 
@@ -92,6 +99,7 @@ void setup(void) {
   sbi( SMCR,SM1 );     // power down mode
   cbi( SMCR,SM2 );     // power down mode
 
+
   setup_watchdog(9);
 //  xbee_sleep();
 }
@@ -105,19 +113,9 @@ void loop(void) {
     nint++;
     if (nint >= 6) {  // 6 for ~ 1 minute
       nint = 0;
-
       xbee_wake();
       Serial.begin(9600);
-      if(read_data()){
-	transmit_data();
-      } else {
-	Serial.print(source);
-	Serial.println(" - error reading sensor");
-
-	if(read_data()){  // retry.  If we're lucky it was a transient error
-	  transmit_data();
-	}
-      }
+      transmit_data(read_data());
 
       delay(5);               // wait until the last serial character is sent
       xbee_sleep();
@@ -128,93 +126,55 @@ void loop(void) {
 }
 
 void xbee_wake(){
+#ifdef HAVE_XBEE
   pinMode(XBEE_PIN, OUTPUT);
   digitalWrite(XBEE_PIN, HIGH);
   delay(5);
   digitalWrite(XBEE_PIN, LOW);
   delay(15);
+#endif
 }
 
 void xbee_sleep(){
+#ifdef HAVE_XBEE
   digitalWrite(XBEE_PIN, HIGH);
   pinMode(XBEE_PIN, INPUT);
+#endif
 }
 
 
-int read_data(){
+float read_data(){
+  // 2 sets of data are taken, the lowest is discarded
+  float reading[2];  // 2 readings
+  sensors.requestTemperatures();
 
-  int HighByte, LowByte, TReading, Tc_100, Tf_100;
-
-  if ( ds.search(addr) ){
-    ds_found = 1;
+  for(int i = 0; i < 2; i++) {
+    reading[i] = sensors.getTempFByIndex(0);
   }
 
-  byte i;
-  byte present = 0;
-  byte data[12];
-//  if ( !ds.search(addr)) {
-//      Serial.print("No more addresses.\n");
-//      ds.reset_search();
-//      return;
-//  }
-  if ( ds_found != 1 ){
-    Serial.print("no oneWire devices found");
-    delay(1000);
-    return 0;
+  if( reading[0] > reading[1]){
+    return reading[0];
+  } else {
+    return reading[1];
   }
-
-  if ( addr[0] != 0x10 && addr[0] != 0x28) {
-     Serial.println("Device is not a DS18S20 family device.\n");
-     Serial.print("addr[0] = ");
-     Serial.println(addr[0], HEX);  
-     return 0;
-  }
-
-  ds.reset();
-  ds.select(addr);
-  ds.write(0x44,1);         // start conversion
-
-  delay(1000);     // maybe 750ms is enough, maybe not
-  // we might do a ds.depower() here, but the reset will take care of it.
-
-  present = ds.reset();
-  ds.select(addr);    
-  ds.write(0xBE);         // Read Scratchpad
-
-  for ( i = 0; i < 9; i++) {           // we need 9 bytes
-    data[i] = ds.read();
-  }
-
-  if( ! OneWire::crc8( data, 8) == data[9]){
-    return 0;
-  }
-  
-  LowByte = data[0];
-  HighByte = data[1];
-  TReading = (HighByte << 8) + LowByte;
-  sign_bit = TReading & 0x8000;  // test most sig bit
-  if (sign_bit) // negative
-  {
-    TReading = (TReading ^ 0xffff) + 1; // 2's comp
-  }
-  Tc_100 = (6 * TReading) + TReading / 4;    // multiply by (100 * 0.0625) or 6.25
-  Tf_100 = (Tc_100 * 9 / 5)   + 3200;
-
-  reading[0] = Tf_100 / 100;  // separate off the whole and fractional portions
-  reading[1] = Tf_100 % 100;
-
-  return 1;
 }
 
-void transmit_data() {
+
+void transmit_data(float temperature) {
   char buff[10];
 
-  if (sign_bit) // If its negative
-  {
-     sprintf(buff, "-%d.%02d", reading[0], reading[1]);
+  // sprintf on arduino doesn't support floats
+  char sign[2];
+  
+  if(temperature < 0) {
+    strcpy(sign,"-");
   } else {
-     sprintf(buff, "%d.%02d", reading[0], reading[1]);
+    sign[0] = '\0';
   }
+
+  int decimal = (temperature - (int)temperature) * 100;
+
+  sprintf(buff, "%s%d.%02d", sign, (int)abs(temperature), abs(decimal));
 
   send_temperature("T", source, buff);
 }
@@ -348,6 +308,11 @@ int timeout() {
   return 0;
 }
 
+void error(char *msg) {
+  Serial.print(source);
+  Serial.print(" - ");
+  Serial.println(msg);
+}
 
 
 //****************************************************************  
