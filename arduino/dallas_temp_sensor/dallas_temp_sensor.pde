@@ -156,10 +156,10 @@ float read_data(){
   // bubble sort
   for(int i = 0; i < 5; i++){
     for(int j = 0; j < 4; j++) {
-      if(reading[j] > reading[j+1]) {
+      if(reading[j] > reading[j + 1]) {
 	temp = reading[j];
 	reading[j] = reading[j + 1];
-	reading[j] = temp;
+	reading[j + 1] = temp;
       }
     }
   }
@@ -171,6 +171,12 @@ float read_data(){
 void transmit_data(float temperature) {
   char buff[10];
 
+  format_float(temperature, buff);
+
+  send_temperature("T", source, buff);
+}
+
+void format_float(float temperature, char *buff) {
   // sprintf on arduino doesn't support floats
   char sign[2];
   
@@ -183,10 +189,7 @@ void transmit_data(float temperature) {
   int decimal = (temperature - (int)temperature) * 100;
 
   sprintf(buff, "%s%d.%02d", sign, (int)abs(temperature), abs(decimal));
-
-  send_temperature("T", source, buff);
 }
-
 
 
 // send temperature to server, looking for a receipt message.
