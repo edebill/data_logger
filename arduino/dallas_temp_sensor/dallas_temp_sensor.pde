@@ -13,7 +13,7 @@ OneWire oneWire(11);  // on pin 11
 DallasTemperature sensors(&oneWire);
 
 //  how do we identify ourselves to the logging application?
-#define source "bedroom"
+#define source "living room"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -145,17 +145,18 @@ void xbee_sleep(){
 
 // returns the median of 5 readings
 float read_data(){
-  float reading[5];
+#define NUM_READINGS 9
+  float reading[NUM_READINGS];
   sensors.requestTemperatures();
 
-  for(int i = 0; i < 5; i++) {
+  for(int i = 0; i < NUM_READINGS; i++) {
     reading[i] = sensors.getTempFByIndex(0);
   }
 
   float temp;
   // bubble sort
-  for(int i = 0; i < 5; i++){
-    for(int j = 0; j < 4; j++) {
+  for(int i = 0; i < NUM_READINGS; i++){
+    for(int j = 0; j < NUM_READINGS - 1; j++) {
       if(reading[j] > reading[j + 1]) {
 	temp = reading[j];
 	reading[j] = reading[j + 1];
@@ -164,7 +165,7 @@ float read_data(){
     }
   }
 
-  return reading[2];  // return the median
+  return reading[NUM_READINGS / 2];  // return the median
 }
 
 
