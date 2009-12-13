@@ -105,8 +105,8 @@ void setup(void) {
 }
 
 void loop(void) {
-  int *reading;
-
+  float reading;
+  
   if (f_wdt==1) {  // wait for timed out watchdog / flag is set when a watchdog timeout occurs
     f_wdt=0;       // reset flag
 
@@ -115,7 +115,12 @@ void loop(void) {
       nint = 0;
       xbee_wake();
       Serial.begin(9600);
-      transmit_data(read_data());
+      reading = read_data();
+
+      // if reading is outside range (probably DEVICE_DISCONNECTED) don't log it
+      if(reading > -67) {
+	transmit_data(reading);
+      }
 
       delay(5);               // wait until the last serial character is sent
       xbee_sleep();
@@ -143,14 +148,33 @@ void xbee_sleep(){
 }
 
 
-// returns the median of 5 readings
+// individual readings are bad 20% or more of the time
+// give ourself NUM_TRIES to get NUM_READINGS good ones, then
+// return the median of the good ones.  If we can't get
+// 3 good ones in NUM_TRIES, return DEVICE_DISCONNECTED (the
+// error return code that comes back from DallasTemperature)
+// DEVICE_DISCONNECTED == -1766.19 F, well outside the
+// valid reading range for this device.
 float read_data(){
-#define NUM_READINGS 9
+#define NUM_TRIES 20
+#define NUM_READINGS 3
   float reading[NUM_READINGS];
   sensors.requestTemperatures();
 
-  for(int i = 0; i < NUM_READINGS; i++) {
+  int rnum = 0;
+
+  for(int i = 0; i < NUM_TRIES; i++) {
     reading[i] = sensors.getTempFByIndex(0);
+    if( reading[i] > -67 ) {
+      rnum++;
+      if(rnum >= NUM_READINGS){
+	break;
+      }
+    }
+  }
+
+  if( rnum < NUM_READINGS ) {   // didn't get enough good ones
+    return DEVICE_DISCONNECTED;
   }
 
   float temp;
