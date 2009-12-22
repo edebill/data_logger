@@ -13,7 +13,7 @@ OneWire oneWire(11);  // on pin 11
 DallasTemperature sensors(&oneWire);
 
 //  how do we identify ourselves to the logging application?
-#define source "living room"
+#define source "computer room"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode

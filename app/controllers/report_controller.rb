@@ -23,7 +23,7 @@ class ReportController < ApplicationController
     @sources = Source.find(:all, :order => :name)
  
     respond_to do |format|
-      format.html {
+      format.html { # setting size doesn't actually work - it always does 800x700
         @graph = open_flash_chart_object(800,700,url_for(:action => 'show',
                                                          :format => 'json',
                                                          :report => {
@@ -147,7 +147,7 @@ class ReportController < ApplicationController
       display_time = this_step.strftime("%b %d, %k:%M %Z")
       
       if step_no % 5 == 0
-        labels <<  XAxisLabel.new(display_time, '#0000ff', 20, 80)
+        labels <<  XAxisLabel.new(display_time, '#0000ff', 10, 80)
       else 
         labels << nil
       end
