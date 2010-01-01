@@ -6,10 +6,7 @@ class ReportController < ApplicationController
   end
 
   def show
-
-
     params[:report][:sources] = params[:report][:sources].collect {|s| Source.find(s.to_i)}
-    
     
     @report = Report.new(params[:report])
     unless @report.start
@@ -36,7 +33,7 @@ class ReportController < ApplicationController
         title = Title.new("Recent Temperatures")
 
 
-        temps = ReportController.prepare_temps(@report)
+        temps = Report.prepare_temps(@report)
 
         (first_reading, last_reading) = ReportController.find_first_and_last_reading(temps)
         step_size = ReportController.calculate_step_size(first_reading, last_reading)
@@ -45,8 +42,6 @@ class ReportController < ApplicationController
         # actual last reading
         x = x_axis(first_time, last_reading, step_size)
         
-
-
 
         (highest_reading, lowest_reading) = ReportController.find_highest_and_lowest_readings(temps)
 
@@ -169,13 +164,13 @@ class ReportController < ApplicationController
       logger.debug("checking highest and lowest for #{source[:source].name}")
       t = source[:readings]
       next if t.blank?
-      by_temp = t.sort { |x, y| x.temp <=> y.temp }
-      logger.debug("#{by_temp[0].temp} - #{by_temp[-1].temp}")
-      if lowest == nil || by_temp[0].temp < lowest
-        lowest = by_temp[0].temp
+      by_temp = t.sort { |x, y| x.display_temp <=> y.display_temp }
+      logger.debug("#{by_temp[0].temp} - #{by_temp[-1].display_temp}")
+      if lowest == nil || by_temp[0].display_temp < lowest
+        lowest = by_temp[0].display_temp
       end
-      if highest == nil || by_temp[-1].temp > highest
-        highest = by_temp[-1].temp
+      if highest == nil || by_temp[-1].display_temp > highest
+        highest = by_temp[-1].display_temp
       end
     end
 
@@ -191,7 +186,7 @@ class ReportController < ApplicationController
       count = nil
       temps.each do |t|
         if t.sampled_at > this_step && t.sampled_at <= next_step
-          total += t.temp
+          total += t.display_temp
           count = count.to_i + 1  # in case it is nil
         end
       end
@@ -220,24 +215,5 @@ class ReportController < ApplicationController
   end
 
 
-  def self.prepare_temps(report)
-
-    report_end = report.end || Time.now.utc
-    
-    temps = []
-    report.sources.each do |source|
-      temps << { :source => source,
-        :readings =>  FahrenheitTemp.find(:all,
-                                          :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  report.start, report_end],
-                                          :order => :sampled_at) || [],
-        :data => []
-      }
-      unless temps[-1][:source].temp_offset.blank?
-        offset  = temps[-1][:source].temp_offset
-        temps[-1][:readings].each { |r| r.temp = r.temp + offset } 
-      end
-    end
-    return temps
-  end
 
 end

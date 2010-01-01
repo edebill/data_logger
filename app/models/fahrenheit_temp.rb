@@ -3,6 +3,14 @@ class FahrenheitTemp < ActiveRecord::Base
   validates_presence_of :source_id
   validates_numericality_of :temp
 
+  def display_temp
+    if self.source.temp_offset.nil?
+      self.temp
+    else
+      self.temp + self.source.temp_offset
+    end
+  end
+
   def parse(string)
     puts "temp = #{string}"
     if md = string.match(/([^:])+:([^:])+/)
