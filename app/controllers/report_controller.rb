@@ -42,12 +42,6 @@ class ReportController < ApplicationController
         # actual last reading
         x = x_axis(first_time, last_reading, step_size)
         
-
-        (highest_reading, lowest_reading) = ReportController.find_highest_and_lowest_readings(temps)
-
-        max = Integer(highest_reading / 5.0) * 5 + 5
-        min = Integer(lowest_reading / 5.0) * 5
-
         
         temps.each do |source|
           t = source[:readings]
@@ -55,6 +49,9 @@ class ReportController < ApplicationController
           source[:data] = calculate_graph_data_for_source(t, first_time, last_reading, step_size)
         end
 
+        (highest_reading, lowest_reading) = ReportController.find_highest_and_lowest_readings(temps)
+        max = Integer(highest_reading / 5.0) * 5 + 5
+        min = Integer(lowest_reading / 5.0) * 5
 
         y = YAxis.new
         y.set_range(min,max,5)
@@ -162,15 +159,15 @@ class ReportController < ApplicationController
     lowest = nil
     temps.each do |source|
       logger.debug("checking highest and lowest for #{source[:source].name}")
-      t = source[:readings]
+      t = source[:data]
       next if t.blank?
-      by_temp = t.sort { |x, y| x.display_temp <=> y.display_temp }
-      logger.debug("#{by_temp[0].temp} - #{by_temp[-1].display_temp}")
-      if lowest == nil || by_temp[0].display_temp < lowest
-        lowest = by_temp[0].display_temp
+      sorted_by_temp = t.sort
+
+      if lowest == nil || sorted_by_temp[0] < lowest
+        lowest = sorted_by_temp[0]
       end
-      if highest == nil || by_temp[-1].display_temp > highest
-        highest = by_temp[-1].display_temp
+      if highest == nil || sorted_by_temp[-1] > highest
+        highest = sorted_by_temp[-1]
       end
     end
 
