@@ -159,9 +159,10 @@ class ReportController < ApplicationController
     lowest = nil
     temps.each do |source|
       logger.debug("checking highest and lowest for #{source[:source].name}")
-      t = source[:data]
-      next if t.blank?
-      sorted_by_temp = t.sort
+      data_list = source[:data].compact    # remove any nil entries
+      next if 0 == data_list.length        # skip this one if they were all nil
+
+      sorted_by_temp = data_list.sort
 
       if lowest == nil || sorted_by_temp[0] < lowest
         lowest = sorted_by_temp[0]
@@ -177,37 +178,56 @@ class ReportController < ApplicationController
   def calculate_graph_data_for_source(temps, first_time, last_reading, step_size)
     data = []
 
-    step_through_times(first_time, last_reading, step_size) do |this_step, next_step, step_no|
+    step_through_readings(temps, first_time, last_reading, step_size) do |this_step, next_step, readings|
 
       total = 0.0
-      count = nil
-      temps.each do |t|
-        if t.sampled_at > this_step && t.sampled_at <= next_step
-          total += t.display_temp
-          count = count.to_i + 1  # in case it is nil
-        end
+      readings.each do |t|
+        total += t.display_temp
       end
       
-      if(count.nil?)
+      if(readings.length == 0)
         data << nil
       else
-        data << total / count
+        data << total / readings.length
       end
     end
 
     return data
   end
 
+  # walk through all the readings (which must be in chronological order)
+  # and yield once for each of the buckets we're going to put on the graph
+  def step_through_readings(temps, first_time, last_time, step_size)
+    this_step = first_time
+    next_step = this_step + 60 * step_size
+
+    readings = []
+    temps.each do |t|
+      if t.sampled_at <= next_step 
+        readings << t
+        next
+      end
+
+      yield(this_step, next_step, readings)
+      readings = []
+      this_step = next_step
+      next_step = this_step + 60 * step_size
+    end
+  end
+
+
   def step_through_times(first_time, last_time, step_size)
     this_step = first_time
-    step_no = 0
-    while this_step < last_time
-      next_step = this_step + 60 * step_size
+    next_step = first_time
 
+    step_no = 0
+
+    while next_step < last_time
+      next_step = this_step + 60 * step_size
       yield(this_step, next_step, step_no)
 
+      step_no +=1
       this_step = next_step
-      step_no += 1
     end
   end
 
