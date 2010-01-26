@@ -24,7 +24,6 @@ class Report < ActiveRecord::Base
     
     step_through_readings(reading_list, first_time, last_time, step_size) do |readings_in_bucket|
 
-      puts "#{readings_in_bucket.length} readings"
       if readings_in_bucket.length == 0
         @data << nil 
       else
@@ -39,12 +38,10 @@ class Report < ActiveRecord::Base
 
   def step_through_readings(reading_list, first_time, last_time, step_size)
     step_starts = first_time
-    puts "overall start = #{first_time} overall end = #{last_time}"
 
     reading_index = 0
     while(step_starts < last_time)
       step_ends = step_starts + step_size.minutes
-      puts "step starts #{step_starts} - step_ends #{step_ends}"
       readings_this_step = []
       while(reading_index < reading_list.length &&
             reading_list[reading_index].sampled_at <= step_ends)
