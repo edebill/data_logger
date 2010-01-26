@@ -14,7 +14,7 @@ class SourcesControllerTest < ActionController::TestCase
 
   test "should create source" do
     assert_difference('Source.count') do
-      post :create, :source => { }
+      post :create, :source => { :temp_offset => 0 }
     end
 
     assert_redirected_to source_path(assigns(:source))
@@ -31,7 +31,7 @@ class SourcesControllerTest < ActionController::TestCase
   end
 
   test "should update source" do
-    put :update, :id => sources(:one).to_param, :source => { }
+    put :update, :id => sources(:one).to_param, :source => { :temp_offset => 0}
     assert_redirected_to source_path(assigns(:source))
   end
 
