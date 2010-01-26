@@ -66,7 +66,7 @@ class ReportTest < ActiveRecord::TestCase
           @input = [@input[0]]
           @results = @r.calculate_graph_data_for_source(@input, 
                                                        @input[0].sampled_at - 2.seconds, 
-                                                       @input[0].sampled_at + 20.minutes - 3.seconds,
+                                                       @input[0].sampled_at - 2.seconds + 20.minutes,
                                                        10)
           puts @results.inspect
         end
