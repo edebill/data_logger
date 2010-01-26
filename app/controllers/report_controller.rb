@@ -46,7 +46,7 @@ class ReportController < ApplicationController
         temps.each do |source|
           t = source[:readings]
 
-          source[:data] = calculate_graph_data_for_source(t, first_time, last_reading, step_size)
+          source[:data] = @report.calculate_graph_data_for_source(t, first_time, last_reading, step_size)
         end
 
         (highest_reading, lowest_reading) = ReportController.find_highest_and_lowest_readings(temps)
@@ -87,7 +87,6 @@ class ReportController < ApplicationController
   end
 
 
-  protected
 
   def self.find_first_and_last_reading(temps)
     first = nil
@@ -115,7 +114,8 @@ class ReportController < ApplicationController
 
     minutes = secs/60
 
-    possible_steps = [1, 5, 10, 15, 20, 30, 60, 120, 240, 360, 720]
+    logger.debug("secs = #{secs}, minutes = #{minutes}")
+    possible_steps = [1, 5, 10, 15, 20, 30, 60, 120, 240, 360, 720, 1440, 2880]
     step = 1
     while (minutes / step) > 200
       step = possible_steps.shift
@@ -175,45 +175,7 @@ class ReportController < ApplicationController
     return highest, lowest
   end
   
-  def calculate_graph_data_for_source(temps, first_time, last_reading, step_size)
-    data = []
 
-    step_through_readings(temps, first_time, last_reading, step_size) do |this_step, next_step, readings|
-
-      total = 0.0
-      readings.each do |t|
-        total += t.display_temp
-      end
-      
-      if(readings.length == 0)
-        data << nil
-      else
-        data << total / readings.length
-      end
-    end
-
-    return data
-  end
-
-  # walk through all the readings (which must be in chronological order)
-  # and yield once for each of the buckets we're going to put on the graph
-  def step_through_readings(temps, first_time, last_time, step_size)
-    this_step = first_time
-    next_step = this_step + 60 * step_size
-
-    readings = []
-    temps.each do |t|
-      if t.sampled_at <= next_step 
-        readings << t
-        next
-      end
-
-      yield(this_step, next_step, readings)
-      readings = []
-      this_step = next_step
-      next_step = this_step + 60 * step_size
-    end
-  end
 
 
   def step_through_times(first_time, last_time, step_size)
@@ -230,7 +192,6 @@ class ReportController < ApplicationController
       this_step = next_step
     end
   end
-
 
 
 end
