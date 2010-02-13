@@ -1,14 +1,23 @@
-<% form_for @report, :url => { :controller => 'report',
-                               :action => 'show' }  do |f| %>
-  <%= f.label :start %>
-  <%= f.text_field :start %>
+You can check out the <%= link_to "latest temperature trends", :action => 'latest_temps' %> or you can request a custom report:
 
-  <%= f.label :end %>
-  <%= f.text_field :end %>
+
+
+<% form_for @report, :url => { :controller => 'report',
+                               :action => 'manual' }  do |f| %>
+<p>
   <% f.fields_for :sources do |sf| %>
     <%= sf.label :name, "source" %>
     <%= collection_select :report, :sources, 
              @sources, :id, :name, {}, {:multiple => true, :size => 6} %>
   <% end %> 
+</p>
+<p>
+  <%= f.label :start %>
+  <%= f.text_field :start %>
+</p>
+<p>
+  <%= f.label :end %>
+  <%= f.text_field :end %>
+</p>
   <%= submit_tag 'submit' %>
 <% end %>

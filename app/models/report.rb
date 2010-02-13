@@ -5,13 +5,11 @@ class Report < ActiveRecord::Base
 
   def Report.prepare_temps(report)
 
-    report_end = report.end || Time.now.utc
-    
     temps = []
     report.sources.each do |source|
       temps << { :source => source,
         :readings =>  FahrenheitTemp.find(:all,
-                                          :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  report.start, report_end],
+                                          :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  report.start, report.end || Time.now],
                                           :order => :sampled_at) || [],
         :data => []
       }

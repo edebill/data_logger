@@ -5,36 +5,87 @@ class ReportController < ApplicationController
     @sources = Source.find(:all, :order => :name)
   end
 
-  def show
+  def manual
     params[:report][:sources] = params[:report][:sources].collect {|s| Source.find(s.to_i)}
     
     @report = Report.new(params[:report])
+    
+    show_report()
+  end
+
+  def latest_temps
+    start = Time.now.utc   # when this comes from user input, Rails gets it right
+                # we need to manually set it here.
+
+    count = 0
+
+    while count == 0 do
+      start = start - 1.day
+      count = FahrenheitTemp.count(:conditions => ['sampled_at > ?', start])
+    end
+
+    latest_sources = FahrenheitTemp.find(:all, :group => 'source_id',
+                                         :select => 'source_id',
+                                         :conditions => ['sampled_at > ?', start])
+
+
+    @report = Report.new(:sources => latest_sources.collect {|s| Source.find(s.source_id)},
+                         :start => start)
+
+    show_report()
+  end
+
+
+  def show_report
     unless @report.start
       logger.debug("defaulting report start to 2 days ago")
       @report.start = Time.now - (60 * 60 * 24 * 2)
     end
+
     @source = @report.sources[0]
     unless @source
       return render(  :file =>  "#{RAILS_ROOT}/public/404.html", :status => :not_found)
     end
-    @sources = Source.find(:all, :order => :name)
  
     respond_to do |format|
       format.html { # setting size doesn't actually work - it always does 800x700
-        @graph = open_flash_chart_object(800,700,url_for(:action => 'show',
+        @graph = open_flash_chart_object(800,700,url_for(:action => 'data',
                                                          :format => 'json',
                                                          :report => {
                                                            :start => @report.start,
-                                                           :end => @report.end,
+                                                           :end => @report.end.utc,
                                                            :sources =>  @report.sources.collect {|s| s.id }}))
+        render :template => 'report/show'
       }
 
+    end
+  end
+
+  def data 
+
+    params[:report][:sources] = params[:report][:sources].collect {|s| Source.find(s.to_i)}
+    
+    @report = Report.new(params[:report])
+    logger.debug(@report.inspect)
+
+    unless @report.start
+      logger.debug("defaulting report start to 2 days ago")
+      @report.start = Time.now - (60 * 60 * 24 * 2)
+    end
+
+    @source = @report.sources[0]
+
+    unless @source
+      return render(  :file =>  "#{RAILS_ROOT}/public/404.html", :status => :not_found)
+    end
+
+    respond_to do |format|
       format.json {
         title = Title.new("Recent Temperatures")
 
 
         temps = Report.prepare_temps(@report)
-
+        logger.debug(temps.inspect)
         (first_reading, last_reading) = ReportController.find_first_and_last_reading(temps)
         step_size = ReportController.calculate_step_size(first_reading, last_reading)
         (first_time, last_time) = ReportController.calculate_first_and_last_time(first_reading, last_reading, step_size)
@@ -109,12 +160,10 @@ class ReportController < ApplicationController
   end
 
   def self.calculate_step_size(first, last)
-
     secs = last - first
 
     minutes = secs/60
 
-    logger.debug("secs = #{secs}, minutes = #{minutes}")
     possible_steps = [1, 5, 10, 15, 20, 30, 60, 120, 240, 360, 720, 1440, 2880]
     step = 1
     while (minutes / step) > 200
