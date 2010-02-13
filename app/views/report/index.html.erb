@@ -1,23 +1,45 @@
-You can check out the <%= link_to "latest temperature trends", :action => 'latest_temps' %> or you can request a custom report:
+You can check out the
+      <%= link_to "latest temperature trends", :action => 'latest_temps' %> or you can request a custom report:
 
 
 
 <% form_for @report, :url => { :controller => 'report',
                                :action => 'manual' }  do |f| %>
 <p>
+<table>
+  <tr>
+    <td valign="top">
   <% f.fields_for :sources do |sf| %>
-    <%= sf.label :name, "source" %>
+    <%= sf.label :name, "Sources" %>
+    </td>
+    <td>
     <%= collection_select :report, :sources, 
              @sources, :id, :name, {}, {:multiple => true, :size => 6} %>
   <% end %> 
-</p>
-<p>
+    </td>
+  </tr>
+  <tr>
+    <td>
   <%= f.label :start %>
+    </td>
+    <td>
   <%= f.text_field :start %>
-</p>
-<p>
+    </td>
+  </tr>
+  <tr>
+    <td>
   <%= f.label :end %>
+    </td>
+    <td>
   <%= f.text_field :end %>
-</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
   <%= submit_tag 'submit' %>
+    </td>
+  </tr>
+</table>
 <% end %>

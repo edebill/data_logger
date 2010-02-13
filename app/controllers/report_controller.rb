@@ -6,6 +6,8 @@ class ReportController < ApplicationController
   end
 
   def manual
+    @title = "Temperature Report"
+
     params[:report][:sources] = params[:report][:sources].collect {|s| Source.find(s.to_i)}
     
     @report = Report.new(params[:report])
@@ -14,6 +16,7 @@ class ReportController < ApplicationController
   end
 
   def latest_temps
+    @title = "Latest Temperature Trends"
     start = Time.now.utc   # when this comes from user input, Rails gets it right
                 # we need to manually set it here.
 
