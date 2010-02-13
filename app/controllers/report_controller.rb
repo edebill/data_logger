@@ -53,7 +53,7 @@ class ReportController < ApplicationController
                                                          :format => 'json',
                                                          :report => {
                                                            :start => @report.start,
-                                                           :end => @report.end.utc,
+                                                           :end => @report.end,
                                                            :sources =>  @report.sources.collect {|s| s.id }}))
         render :template => 'report/show'
       }
