@@ -9,7 +9,7 @@ class Report < ActiveRecord::Base
     report.sources.each do |source|
       temps << { :source => source,
         :readings =>  FahrenheitTemp.find(:all,
-                                          :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  report.start, report.end || Time.now],
+                                          :conditions => [ 'source_id = ? and sampled_at > ? and sampled_at < ?', source.id,  report.start, report.end || Time.now.utc],
                                           :order => :sampled_at) || [],
         :data => []
       }
