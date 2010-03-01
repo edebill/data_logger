@@ -8,19 +8,22 @@
     <%= stylesheet_link_tag 'scaffold' %>
     <%= stylesheet_link_tag 'datalogger' %>
   </head>
-  <body><div id="topnav">
-      <span id="sitename"><%= link_to "DataLogger", root_url() %>
-      </span><div class="navchoice">
-	<%= link_to "Sources", :controller => "sources", :action => "index" %>
+  <body>
+    <div id="header">
+      <div id="sitename">
+        <%= link_to "DataLogger", root_url() %>
       </div>
-      <div class="navchoice">
-	<%= link_to "Reports", :controller => "report", :action => "index" %>
+      <div id="menu">
+        <div class="menuitem">
+  	<%= link_to "Sources", :controller => "sources", :action => "index" %>
+        </div>
+        <div class="menuitem">
+  	<%= link_to "Reports", :controller => "report", :action => "index" %>
+        </div>
       </div>
-    </div>
-    <div id="content" >
+    </div><div id="content" >
 	<%= yield %>
-    </div>
-    <div id="footer">
+    </div><div id="footer">
       <div id="copyright">
 	&copy;<a href="http://erik.debill.org">Erik DeBill</a>, 2009-2010
       </div>

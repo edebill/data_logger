@@ -1,17 +1,15 @@
 
-#topnav {
+#header {
+    position: relative;
+    padding: 10px;
+
     background-color: #e0f0ff;
     border-bottom: 1px black solid;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
- 
 }
 
 #sitename {
     font-size: 20px;
     font-weight: bold;
-    padding-right: 40px;
 }
 
 #sitename a {
@@ -19,31 +17,41 @@
 }
 
 
-div.navchoice {
+#menu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+div.menuitem {
     float: right;
-    margin-left: 5px;
-    padding-right: 15px;
+    padding: 10px 10px 10px 10px;
+//    border-left: 1px black solid;
 }
 
 
 
 #content {
-    padding: 15px;
-    background-color: #f0f8ff;
+    position: relative;
 
+    padding: 15px;
     padding-bottom: 30px;
+
+    background-color: #f0f8ff;
 }
 
 
 
 #footer {
+    position: relative;
+
     background-color: #e0f0ff;
-    width: 100%;
     border-top: 1px black solid;
 }
 
 #copyright {
     float: right;
+
     padding-right: 15px;
     font-size: 8px;
 }
