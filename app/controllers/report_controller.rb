@@ -20,7 +20,7 @@ class ReportController < ApplicationController
 
     @temps = FahrenheitTemp.find(:all, :conditions => ['created_at > ? ', Time.now.utc - 30.minutes])
     
-    @Sources = [5, 7]
+    @sources = []
 
     @temps.map do |t|
       unless @sources.include? t.source_id
