@@ -33,20 +33,20 @@ div.menuitem {
 
 #content {
     position: relative;
-
     padding: 15px;
     padding-bottom: 30px;
-
     background-color: #f0f8ff;
+    min-height: 300px;
 }
 
 
-
 #footer {
-    position: relative;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
 
-    background-color: #e0f0ff;
     border-top: 1px black solid;
+    background-color: #e0f0ff;
 }
 
 #copyright {
@@ -58,10 +58,10 @@ div.menuitem {
 
 
 .big_data_block {
-    position: relative;
+    float: left;
     border: 1px black solid;
     padding: 15px;
-    margin: 10px;
+    margin: 10px 10px 40px 10px;
     width:  200px;
     height: 100px;
     background-color: #e0f0ff;
