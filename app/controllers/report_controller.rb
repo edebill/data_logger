@@ -16,6 +16,40 @@ class ReportController < ApplicationController
   end
 
   def latest_temps
+    @title = "Latest Temperatures"
+
+    @temps = FahrenheitTemp.find(:all, :conditions => ['created_at > ? ', Time.now - 30.minutes])
+    
+    @sources = []
+
+    @temps.map do |t|
+      unless @sources.include? t.source_id
+        @sources << t.source_id
+      end
+    end
+    @sources = [5,7]
+    @custom_script =  <<SCRIPT
+var updateTemp = function updateTemp(source) {
+   $.getJSON('/sources/' + source + '/fahrenheit_temps/latest.json', function(data) {
+         $('#temp_source_' + source).replaceWith('<div id="temp_source_' + source + '"  class="big_data_block">  <div class="big_data_source">' + data.fahrenheit_temp.source.name + '</div><div class="big_data_value">' + data.fahrenheit_temp.display_temp + '</div></div>') } );
+}   
+ $(document).ready(function() {
+ 
+SCRIPT
+
+    @sources.each do |s|
+      @custom_script += <<SCRIPT
+  $('#content').append('<div id="temp_source_#{ s }" class="big_data_block"></div>')
+  updateTemp(#{ s });
+  window.setInterval("updateTemp(#{ s })", 30000);
+
+SCRIPT
+end
+    @custom_script  += "});"
+  end
+
+
+  def latest_trends
     @title = "Latest Temperature Trends"
     start = Time.now.utc   # when this comes from user input, Rails gets it right
                 # we need to manually set it here.

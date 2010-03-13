@@ -4,7 +4,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :time_periods
 
-  map.resources :sources
+  map.resources :sources do |source|
+    source.resources :fahrenheit_temps, :collection => [:latest]
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

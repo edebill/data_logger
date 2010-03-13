@@ -7,6 +7,12 @@
     <title><%=h @title %></title>
     <%= stylesheet_link_tag 'scaffold' %>
     <%= stylesheet_link_tag 'datalogger' %>
+    <%= javascript_include_tag 'jquery-1.4.1' %>
+    <% if @custom_script %>
+    <script type="text/javascript">
+      <%= @custom_script %>
+    </script>
+    <% end %>
   </head>
   <body>
     <div id="header">

@@ -1,4 +1,22 @@
 class FahrenheitTempsController < ApplicationController
+
+  def latest
+    @source_id = params[:source_id]
+    @fahrenheit_temp = FahrenheitTemp.find(:first, 
+                                           :conditions => { :source_id => @source_id},
+                                           :order => 'created_at desc')
+
+    respond_to do |format|
+      format.html { render :action => 'show' }
+      format.xml  { render :xml => @fahrenheit_temp.to_xml(
+                                                     :include => [:source],
+                                                     :methods => [:display_temp]) }
+      format.json  { render :json => @fahrenheit_temp.to_json(
+                                                     :include => [:source ],
+                                                     :methods => [:display_temp] ) }
+    end
+  end
+
   # GET /fahrenheit_temps
   # GET /fahrenheit_temps.xml
   def index
