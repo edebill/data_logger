@@ -27,7 +27,7 @@ class ReportController < ApplicationController
         @sources << t.source_id
       end
     end
-    @sources = [5,7]
+
     @custom_script =  <<SCRIPT
 var updateTemp = function updateTemp(source) {
    $.getJSON('/sources/' + source + '/fahrenheit_temps/latest.json', function(data) {
