@@ -63,7 +63,7 @@ div.menuitem {
     padding: 15px;
     margin: 10px 10px 40px 10px;
     width:  200px;
-    height: 100px;
+    height: 150px;
     background-color: #e0f0ff;
     text-align: center;
 }
@@ -72,10 +72,17 @@ div.menuitem {
     font-size: 24px;
     align: center;
     margin: 10px;
+    height: 50px;
 }
 
 .big_data_value {
     font-size: 24px;
+    align: center;
+    margin-top: 30px;
+}
+
+.big_data_time {
+    font-size: 12px;
     align: center;
     margin-top: 30px;
 }

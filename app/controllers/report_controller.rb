@@ -31,7 +31,7 @@ class ReportController < ApplicationController
     @custom_script =  <<SCRIPT
 var updateTemp = function updateTemp(source) {
    $.getJSON('/sources/' + source + '/fahrenheit_temps/latest.json', function(data) {
-         $('#temp_source_' + source).replaceWith('<div id="temp_source_' + source + '"  class="big_data_block">  <div class="big_data_source">' + data.fahrenheit_temp.source.name + '</div><div class="big_data_value">' + data.fahrenheit_temp.display_temp + '</div></div>') } );
+         $('#temp_source_' + source).replaceWith('<div id="temp_source_' + source + '"  class="big_data_block">  <div class="big_data_source">' + data.fahrenheit_temp.source.name + '</div><div class="big_data_value">' + data.fahrenheit_temp.display_temp + '</div><div class="big_data_time">' + data.fahrenheit_temp.display_time + '</div></div>') } );
 }   
  $(document).ready(function() {
  

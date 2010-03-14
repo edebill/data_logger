@@ -10,10 +10,12 @@ class FahrenheitTempsController < ApplicationController
       format.html { render :action => 'show' }
       format.xml  { render :xml => @fahrenheit_temp.to_xml(
                                                      :include => [:source],
-                                                     :methods => [:display_temp]) }
+                                                     :methods => [:display_temp,
+                                                                 :display_time]) }
       format.json  { render :json => @fahrenheit_temp.to_json(
                                                      :include => [:source ],
-                                                     :methods => [:display_temp] ) }
+                                                     :methods => [:display_temp,
+                                                                  :display_time] ) }
     end
   end
 

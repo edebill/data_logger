@@ -3,6 +3,10 @@ class FahrenheitTemp < ActiveRecord::Base
   validates_presence_of :source_id
   validates_numericality_of :temp
 
+  def display_time
+    self.created_at.asctime
+  end
+
   def display_temp
     if self.source.temp_offset.nil?
       self.temp
