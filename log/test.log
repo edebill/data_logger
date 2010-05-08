@@ -1,0 +1,2772 @@
+# Logfile created on Tue Jan 26 14:32:55 -0600 2010  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "fahrenheit_temps" [0m
+
+
+Processing FahrenheitTempsController#create (for 0.0.0.0 at 2010-01-26 14:32:59) [POST]
+  Parameters: {"fahrenheit_temp"=>{}}
+Rendering template within layouts/fahrenheit_temps
+Rendering fahrenheit_temps/new
+Completed in 10ms (View: 5, DB: 3) | 200 OK [http://test.host/fahrenheit_temps?]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "fahrenheit_temps" [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "fahrenheit_temps" [0m
+  [4;35;1mFahrenheitTemp Load (0.2ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+
+
+Processing FahrenheitTempsController#destroy (for 0.0.0.0 at 2010-01-26 14:32:59) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mFahrenheitTemp Load (0.2ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+  [4;35;1mFahrenheitTemp Destroy (0.5ms)[0m   [0mDELETE FROM "fahrenheit_temps" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/fahrenheit_temps
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/fahrenheit_temps/2053932785]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "fahrenheit_temps" [0m
+  [4;35;1mFahrenheitTemp Load (0.3ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+
+
+Processing FahrenheitTempsController#edit (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mFahrenheitTemp Load (0.2ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+Rendering template within layouts/fahrenheit_temps
+Rendering fahrenheit_temps/edit
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/fahrenheit_temps/2053932785/edit]
+
+
+Processing FahrenheitTempsController#index (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  [4;35;1mFahrenheitTemp Load (2.0ms)[0m   [0mSELECT * FROM "fahrenheit_temps" ORDER BY sampled_at[0m
+Rendering template within layouts/fahrenheit_temps
+Rendering fahrenheit_temps/index
+Completed in 5ms (View: 3, DB: 2) | 200 OK [http://test.host/fahrenheit_temps]
+
+
+Processing FahrenheitTempsController#new (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+Rendering template within layouts/fahrenheit_temps
+Rendering fahrenheit_temps/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/fahrenheit_temps/new]
+  [4;36;1mFahrenheitTemp Load (0.6ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+
+
+Processing FahrenheitTempsController#show (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mFahrenheitTemp Load (0.3ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+Rendering template within layouts/fahrenheit_temps
+Rendering fahrenheit_temps/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/fahrenheit_temps/2053932785]
+  [4;36;1mFahrenheitTemp Load (0.3ms)[0m   [0;1mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+
+
+Processing FahrenheitTempsController#update (for 0.0.0.0 at 2010-01-26 14:32:59) [PUT]
+  Parameters: {"fahrenheit_temp"=>{}, "id"=>"2053932785"}
+  [4;35;1mFahrenheitTemp Load (0.2ms)[0m   [0mSELECT * FROM "fahrenheit_temps" WHERE ("fahrenheit_temps"."id" = 2053932785) [0m
+Redirected to http://test.host/fahrenheit_temps/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/fahrenheit_temps/2053932785?]
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:32:59) [POST]
+  Parameters: {"source"=>{}}
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://test.host/sources?]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:32:59) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Destroy (0.7ms)[0m   [0mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/sources/2053932785]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 3ms (View: 2, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  [4;35;1mSource Load (1.0ms)[0m   [0mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:32:59) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{}}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources/2053932785?]
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT count(*) AS count_all FROM "time_periods" [0m
+
+
+Processing TimePeriodsController#create (for 0.0.0.0 at 2010-01-26 14:32:59) [POST]
+  Parameters: {"time_period"=>{}}
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "time_periods" [0m
+  [4;36;1mTimePeriod Load (0.2ms)[0m   [0;1mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+
+
+Processing TimePeriodsController#destroy (for 0.0.0.0 at 2010-01-26 14:32:59) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mTimePeriod Load (0.2ms)[0m   [0mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+  [4;36;1mTimePeriod Destroy (2.6ms)[0m   [0;1mDELETE FROM "time_periods" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/time_periods
+Completed in 4ms (DB: 4) | 302 Found [http://test.host/time_periods/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "time_periods" [0m
+  [4;36;1mTimePeriod Load (1.0ms)[0m   [0;1mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+
+
+Processing TimePeriodsController#edit (for 0.0.0.0 at 2010-01-26 14:32:59) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mTimePeriod Load (0.2ms)[0m   [0mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+Rendering template within layouts/time_periods
+Rendering time_periods/edit
+Completed in 33ms (View: 33, DB: 1) | 200 OK [http://test.host/time_periods/2053932785/edit]
+
+
+Processing TimePeriodsController#index (for 0.0.0.0 at 2010-01-26 14:33:00) [GET]
+  [4;36;1mTimePeriod Load (0.7ms)[0m   [0;1mSELECT * FROM "time_periods" [0m
+Rendering template within layouts/time_periods
+Rendering time_periods/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/time_periods]
+
+
+Processing TimePeriodsController#new (for 0.0.0.0 at 2010-01-26 14:33:00) [GET]
+Rendering template within layouts/time_periods
+Rendering time_periods/new
+Completed in 7ms (View: 7, DB: 0) | 200 OK [http://test.host/time_periods/new]
+  [4;35;1mTimePeriod Load (0.3ms)[0m   [0mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+
+
+Processing TimePeriodsController#show (for 0.0.0.0 at 2010-01-26 14:33:00) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mTimePeriod Load (0.2ms)[0m   [0;1mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+Rendering template within layouts/time_periods
+Rendering time_periods/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/time_periods/2053932785]
+  [4;35;1mTimePeriod Load (0.3ms)[0m   [0mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+
+
+Processing TimePeriodsController#update (for 0.0.0.0 at 2010-01-26 14:33:00) [PUT]
+  Parameters: {"id"=>"2053932785", "time_period"=>{}}
+  [4;36;1mTimePeriod Load (0.2ms)[0m   [0;1mSELECT * FROM "time_periods" WHERE ("time_periods"."id" = 2053932785) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:35:32) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.3ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:35:32', 0.0, '2010-01-26 20:35:32')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 7ms (DB: 7) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:35:32) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 3) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:35:32) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 6, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:35:32) [GET]
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:35:32) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:35:32) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.9ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:35:32) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources/2053932785?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:36:15) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:36:15', 0.0, '2010-01-26 20:36:15')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:36:15) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:36:15) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:36:15) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:36:15) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:36:15) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:36:15) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 20:36:15', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:53:17) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:53:17', 0.0, '2010-01-26 20:53:17')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:53:17) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:53:17) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:53:17) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:53:17) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:53:17) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:53:17) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 20:53:17', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:56:55) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:56:55', 0.0, '2010-01-26 20:56:55')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:56:55) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:56:55) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:56:55) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:56:55) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:56:55) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:56:55) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 20:56:55', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:58:13) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.0ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:58:13', 0.0, '2010-01-26 20:58:13')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:58:13) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:58:13) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:58:13) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:58:13) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:58:13) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:58:13) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 20:58:13', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 14:58:45) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 20:58:45', 0.0, '2010-01-26 20:58:45')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 14:58:45) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 14:58:45) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 14:58:45) [GET]
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 14:58:45) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.6ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 14:58:45) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 14:58:45) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.6ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 20:58:45', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:01:58) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:01:58', 0.0, '2010-01-26 21:01:58')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:01:58) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:01:58) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:01:58) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:01:58) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:01:58) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:01:58) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:01:58', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:03:26) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:03:26', 0.0, '2010-01-26 21:03:26')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:03:26) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:03:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:03:26) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:03:26) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:03:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:03:26) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:03:26', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:05:38) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:05:38', 0.0, '2010-01-26 21:05:38')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:05:38) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (1.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:05:38) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 5, DB: 2) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:05:38) [GET]
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:05:38) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:05:38) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:05:38) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (2.0ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:05:38', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:06:29) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:06:29', 0.0, '2010-01-26 21:06:29')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:06:29) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:06:29) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:06:29) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:06:29) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:06:29) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:06:29) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:06:29', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:07:10) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:07:10', 0.0, '2010-01-26 21:07:10')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 7ms (DB: 7) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:07:10) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 3ms (DB: 3) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (1.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:07:10) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 8ms (View: 7, DB: 2) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:07:10) [GET]
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:07:10) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:07:10) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.6ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:07:10) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.5ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:07:10', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:09:30) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:09:30', 0.0, '2010-01-26 21:09:30')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:09:30) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:09:30) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:09:30) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:09:30) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:09:30) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:09:30) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:09:30', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:10:49) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:10:49', 0.0, '2010-01-26 21:10:49')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:10:49) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:10:49) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:10:49) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:10:49) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:10:49) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:10:49) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:10:49', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:11:34) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:11:34', 0.0, '2010-01-26 21:11:34')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:11:34) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:11:34) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:11:34) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:11:34) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:11:34) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:11:34) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:11:34', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:14:25) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:14:25', 0.0, '2010-01-26 21:14:25')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 7ms (DB: 6) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:14:25) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.5ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 3ms (DB: 3) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:14:25) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 10ms (View: 9, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:14:25) [GET]
+  [4;36;1mSource Load (0.9ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:14:25) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:14:25) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:14:25) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.5ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:14:25', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:15:09) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:15:09', 0.0, '2010-01-26 21:15:09')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:15:09) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:15:09) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 7ms (View: 6, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:15:09) [GET]
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:15:09) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:15:09) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:15:09) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.5ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:15:09', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:18:39) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:18:39', 0.0, '2010-01-26 21:18:39')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 4) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:18:39) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:18:39) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:18:39) [GET]
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:18:39) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:18:39) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:18:39) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:18:39', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:22:26) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.8ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:22:26', 0.0, '2010-01-26 21:22:26')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:22:26) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.6ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:22:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:22:26) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:22:26) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:22:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:22:26) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:22:26', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 4ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:22:48) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:22:48', 0.0, '2010-01-26 21:22:48')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:22:48) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:22:48) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:22:48) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:22:48) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:22:48) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:22:48) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:22:48', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:23:18) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:23:18', 0.0, '2010-01-26 21:23:18')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:23:18) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:23:18) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:23:18) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:23:18) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:23:18) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:23:18) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:23:18', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.9ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:24:11) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:24:11', 0.0, '2010-01-26 21:24:11')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 4) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:24:11) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.5ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:24:11) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 6, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:24:11) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:24:11) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:24:11) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:24:11) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.7ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:24:11', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:37:21) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.1ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:37:21', 0.0, '2010-01-26 21:37:21')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 4) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:37:21) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.9ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:37:21) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 7ms (View: 6, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:37:21) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:37:21) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:37:21) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:37:21) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.0ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:37:21', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 4ms (DB: 2) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:37:55) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:37:55', 0.0, '2010-01-26 21:37:55')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 5) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:37:55) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.6ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 3ms (DB: 3) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:37:55) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:37:55) [GET]
+  [4;36;1mSource Load (1.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:37:55) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:37:55) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:37:55) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.0ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:37:55', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:38:30) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:38:30', 0.0, '2010-01-26 21:38:30')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:38:30) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:38:30) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:38:30) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:38:30) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:38:30) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:38:30) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:38:30', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:49:02) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:49:02', 0.0, '2010-01-26 21:49:02')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:49:02) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:49:02) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:49:02) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:49:02) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:49:02) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:49:02) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:49:02', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:49:26) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:49:26', 0.0, '2010-01-26 21:49:26')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 4) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:49:26) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 2) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:49:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:49:26) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:49:26) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:49:26) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:49:26) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:49:26', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 2) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:50:52) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:50:52', 0.0, '2010-01-26 21:50:52')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:50:52) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:50:52) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:50:52) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:50:52) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:50:52) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:50:52) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:50:52', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:53:09) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:53:09', 0.0, '2010-01-26 21:53:09')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:53:09) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.7ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:53:09) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:53:09) [GET]
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:53:09) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:53:09) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 2, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:53:09) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.6ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:53:09', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:53:48) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:53:48', 0.0, '2010-01-26 21:53:48')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:53:48) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:53:48) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:53:48) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:53:48) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:53:48) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:53:48) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:53:48', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:54:36) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.4ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:54:36', 0.0, '2010-01-26 21:54:36')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:54:36) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:54:36) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:54:36) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:54:36) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:54:36) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:54:36) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:54:36', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 15:55:18) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 21:55:18', 0.0, '2010-01-26 21:55:18')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 15:55:18) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 15:55:18) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 15:55:18) [GET]
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 15:55:18) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 15:55:18) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 15:55:18) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.5ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 21:55:18', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:00:19) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:00:19', 0.0, '2010-01-26 22:00:19')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:00:19) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.4ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:00:19) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:00:19) [GET]
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:00:19) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:00:19) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:00:19) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.6ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:00:19', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:01:38) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.0ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:01:38', 0.0, '2010-01-26 22:01:38')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 7) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:01:38) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.6ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:01:38) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:01:38) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:01:38) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:01:38) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (1.1ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:01:38) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.8ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:01:38', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:02:16) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (1.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:02:16', 0.0, '2010-01-26 22:02:16')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 6) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:02:16) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.9ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 3ms (DB: 3) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:02:16) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 8ms (View: 7, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:02:16) [GET]
+  [4;36;1mSource Load (0.8ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:02:16) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.7ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:02:16) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 3ms (View: 2, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:02:16) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:02:16', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:02:40) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:02:40', 0.0, '2010-01-26 22:02:40')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:02:40) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:02:40) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:02:40) [GET]
+  [4;36;1mSource Load (0.4ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:02:40) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.5ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:02:40) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:02:40) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:02:40', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:03:32) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:03:32', 0.0, '2010-01-26 22:03:32')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:03:32) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.2ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:03:32) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:03:32) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:03:32) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:03:32) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:03:32) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.3ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:03:32', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:05:31) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:05:31', 0.0, '2010-01-26 22:05:31')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 5ms (DB: 6) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:05:31) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (1.1ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:05:31) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:05:31) [GET]
+  [4;36;1mSource Load (1.1ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:05:31) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (1.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:05:31) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:05:31) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (1.2ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:05:31', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 4ms (DB: 2) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:07:25) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.7ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:07:25', 0.0, '2010-01-26 22:07:25')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:07:25) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.6ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:07:25) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:07:25) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:07:25) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:07:25) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:07:25) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.9ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:07:25', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-01-26 16:07:58) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.6ms)[0m   [0mINSERT INTO "sources" ("name", "updated_at", "temp_offset", "created_at") VALUES(NULL, '2010-01-26 22:07:58', 0.0, '2010-01-26 22:07:58')[0m
+Redirected to http://test.host/sources/2053932786
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-01-26 16:07:58) [DELETE]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/sources/2053932785]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-01-26 16:07:58) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/edit
+Completed in 5ms (View: 4, DB: 1) | 200 OK [http://test.host/sources/2053932785/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-01-26 16:07:58) [GET]
+  [4;36;1mSource Load (0.5ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/sources
+Rendering sources/index
+Completed in 3ms (View: 2, DB: 1) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-01-26 16:07:58) [GET]
+Rendering template within layouts/sources
+Rendering sources/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.4ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-01-26 16:07:58) [GET]
+  Parameters: {"id"=>"2053932785"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+Rendering template within layouts/sources
+Rendering sources/show
+Completed in 2ms (View: 1, DB: 1) | 200 OK [http://test.host/sources/2053932785]
+  [4;35;1mSource Load (1.1ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-01-26 16:07:58) [PUT]
+  Parameters: {"id"=>"2053932785", "source"=>{"temp_offset"=>0}}
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 2053932785) [0m
+  [4;35;1mSource Update (0.5ms)[0m   [0mUPDATE "sources" SET "updated_at" = '2010-01-26 22:07:58', "temp_offset" = 0.0 WHERE "id" = 2053932785[0m
+Redirected to http://test.host/sources/2053932785
+Completed in 3ms (DB: 2) | 302 Found [http://test.host/sources/2053932785?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+
+
+Processing SourcesController#create (for 0.0.0.0 at 2010-05-08 15:16:01) [POST]
+  Parameters: {"source"=>{"temp_offset"=>0}}
+  [4;35;1mSource Create (0.5ms)[0m   [0mINSERT INTO "sources" ("name", "created_at", "updated_at", "temp_offset") VALUES(NULL, '2010-05-08 20:16:01', '2010-05-08 20:16:01', 0.0)[0m
+Redirected to http://test.host/sources/980190963
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/sources?source%5Btemp_offset%5D=0]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+
+
+Processing SourcesController#destroy (for 0.0.0.0 at 2010-05-08 15:16:01) [DELETE]
+  Parameters: {"id"=>"980190962"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+  [4;36;1mSource Destroy (0.3ms)[0m   [0;1mDELETE FROM "sources" WHERE "id" = 980190962[0m
+Redirected to http://test.host/sources
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/sources/980190962]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "sources" [0m
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+
+
+Processing SourcesController#edit (for 0.0.0.0 at 2010-05-08 15:16:01) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+Rendering template within layouts/application
+Rendering sources/edit
+Completed in 9ms (View: 9, DB: 1) | 200 OK [http://test.host/sources/980190962/edit]
+
+
+Processing SourcesController#index (for 0.0.0.0 at 2010-05-08 15:16:01) [GET]
+  [4;36;1mSource Load (0.3ms)[0m   [0;1mSELECT * FROM "sources" [0m
+Rendering template within layouts/application
+Rendering sources/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/sources]
+
+
+Processing SourcesController#new (for 0.0.0.0 at 2010-05-08 15:16:01) [GET]
+Rendering template within layouts/application
+Rendering sources/new
+Completed in 34ms (View: 3, DB: 0) | 200 OK [http://test.host/sources/new]
+  [4;35;1mSource Load (0.3ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+
+
+Processing SourcesController#show (for 0.0.0.0 at 2010-05-08 15:16:01) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+Rendering template within layouts/application
+Rendering sources/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/sources/980190962]
+  [4;35;1mSource Load (0.2ms)[0m   [0mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+
+
+Processing SourcesController#update (for 0.0.0.0 at 2010-05-08 15:16:01) [PUT]
+  Parameters: {"source"=>{"temp_offset"=>0}, "id"=>"980190962"}
+  [4;36;1mSource Load (0.2ms)[0m   [0;1mSELECT * FROM "sources" WHERE ("sources"."id" = 980190962) [0m
+  [4;35;1mSource Update (0.4ms)[0m   [0mUPDATE "sources" SET "temp_offset" = 0.0, "updated_at" = '2010-05-08 20:16:01' WHERE "id" = 980190962[0m
+Redirected to http://test.host/sources/980190962
+Completed in 3ms (DB: 1) | 302 Found [http://test.host/sources/980190962?source%5Btemp_offset%5D=0]

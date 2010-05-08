@@ -9,6 +9,7 @@ class LogEvent
       event = case md[2]
               when "P" then TimePeriod.new()
               when "T" then FahrenheitTemp.new()
+              when "V" then Voltage.new()
               end
 
       if event

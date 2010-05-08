@@ -1,0 +1,18 @@
+<p>
+  <b>Voltage:</b>
+  <%=h @voltage.voltage %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%=h @voltage.source_id %>
+</p>
+
+<p>
+  <b>Sampled at:</b>
+  <%=h @voltage.sampled_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_voltage_path(@voltage) %> |
+<%= link_to 'Back', voltages_path %>

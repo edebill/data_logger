@@ -13,7 +13,7 @@ OneWire oneWire(11);  // on pin 11
 DallasTemperature sensors(&oneWire);
 
 //  how do we identify ourselves to the logging application?
-#define source "computer room"
+#define source "bedroom"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -121,6 +121,7 @@ void loop(void) {
       if(reading > -67) {
 	transmit_data(reading);
       }
+      transmit_voltage_data(read_vcc());
 
       delay(5);               // wait until the last serial character is sent
       xbee_sleep();
@@ -198,8 +199,25 @@ void transmit_data(float temperature) {
 
   format_float(temperature, buff);
 
-  send_temperature("T", source, buff);
+  send_event("T", source, buff);
 }
+
+
+
+void transmit_voltage_data(long voltage) {
+  char buff[6];
+
+  format_long(voltage, buff);
+
+  send_event("V", source, buff);
+}
+
+
+void format_long(long voltage, char *buff) {
+  long decimal = voltage % 1000;
+  sprintf(buff, "%ld.%03ld", voltage / 1000, decimal);
+}
+
 
 void format_float(float temperature, char *buff) {
   // sprintf on arduino doesn't support floats
@@ -217,9 +235,9 @@ void format_float(float temperature, char *buff) {
 }
 
 
-// send temperature to server, looking for a receipt message.
+// send event to server, looking for a receipt message.
 //  try 3 times, then give up
-void send_temperature(char *type, char *source_name, char *data) {
+void send_event(char *type, char *source_name, char *data) {
   int crc = calculate_crc(type, source_name, data);
   sprintf(crchex, "%04X", crc);
 
@@ -396,4 +414,21 @@ void setup_watchdog(int ii) {
 // Watchdog Interrupt Service / is executed when  watchdog timed out
 ISR(WDT_vect) {
   f_wdt=1;  // set global flag
+}
+
+
+
+
+
+long read_vcc() {
+  long result;
+  // Read 1.1V reference against AVcc
+  ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
+  delay(2); // Wait for Vref to settle
+  ADCSRA |= _BV(ADSC); // Convert
+  while (bit_is_set(ADCSRA,ADSC));
+  result = ADCL;
+  result |= ADCH<<8;
+  result = 1126400L / result; // Back-calculate AVcc in mV
+  return result;
 }

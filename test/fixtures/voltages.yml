@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  voltage: 1.5
+  source_id: 1
+  sampled_at: 2010-05-08 15:17:40
+
+two:
+  voltage: 1.5
+  source_id: 1
+  sampled_at: 2010-05-08 15:17:40
