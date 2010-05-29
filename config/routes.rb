@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :voltages
+
   map.root     :controller => 'report', :action => 'index'
   map.resources :fahrenheit_temps
 

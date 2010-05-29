@@ -9,6 +9,28 @@
 
 // DS18S20 Temperature chip i/o
 // can be either parasite powered or conventionally powered
+#include "WProgram.h"
+void setup(void);
+void loop(void);
+void xbee_wake();
+void xbee_sleep();
+float read_data();
+void transmit_data(float temperature);
+void transmit_voltage_data(long voltage);
+void format_long(long voltage, char *buff);
+void format_float(float temperature, char *buff);
+void send_event(char *type, char *source_name, char *data);
+void send_msg(char *type, char *source_name, char *data, char *crchex);
+int check_for_receipt(char * crcstring);
+int calculate_crc(char * type, char * source_name, char * message);
+uint16_t  crc_string(uint16_t crc, char * crc_message);
+void  empty_input_buffer();
+void begin_timeout(uint16_t timeout_period);
+int timeout();
+void error(char *msg);
+void system_sleep();
+void setup_watchdog(int ii);
+long read_vcc();
 OneWire oneWire(11);  // on pin 11
 DallasTemperature sensors(&oneWire);
 
@@ -432,3 +454,16 @@ long read_vcc() {
   result = 1126400L / result; // Back-calculate AVcc in mV
   return result;
 }
+
+int main(void)
+{
+	init();
+
+	setup();
+    
+	for (;;)
+		loop();
+        
+	return 0;
+}
+

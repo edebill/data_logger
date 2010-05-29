@@ -1,0 +1,24 @@
+<h1>Listing voltages</h1>
+
+<table>
+  <tr>
+    <th>Voltage</th>
+    <th>Source</th>
+    <th>Sampled at</th>
+  </tr>
+
+<% @voltages.each do |voltage| %>
+  <tr>
+    <td><%=h voltage.voltage %></td>
+    <td><%=h voltage.source_id %></td>
+    <td><%=h voltage.sampled_at %></td>
+    <td><%= link_to 'Show', voltage %></td>
+    <td><%= link_to 'Edit', edit_voltage_path(voltage) %></td>
+    <td><%= link_to 'Destroy', voltage, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New voltage', new_voltage_path %>
