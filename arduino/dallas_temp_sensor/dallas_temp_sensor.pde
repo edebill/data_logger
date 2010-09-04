@@ -13,7 +13,7 @@ OneWire oneWire(11);  // on pin 11
 DallasTemperature sensors(&oneWire);
 
 //  how do we identify ourselves to the logging application?
-#define source "bedroom"
+#define source "back porch"
 
 //  connected to pin 9 on XBee, with a pullup resistor (100K seems good)
 //  This is used to take the Xbee in and out of sleep mode
@@ -32,9 +32,12 @@ DallasTemperature sensors(&oneWire);
 #define HAVE_XBEE
 #endif
 
+#ifdef HAVE_XBEE
 
 #ifndef HAVE_XBEE_SLEEP
 #define HAVE_XBEE_SLEEP
+#endif
+
 #endif
 
 //  for our sleep
@@ -83,6 +86,8 @@ void setup(void) {
   sensors.begin();
 
   delay(100);
+  take_temperature_reading();
+
 
   // CPU Sleep Modes 
   // SM2 SM1 SM0 Sleep Mode
@@ -115,19 +120,25 @@ void loop(void) {
       nint = 0;
       xbee_wake();
       Serial.begin(9600);
-      reading = read_data();
-
-      // if reading is outside range (probably DEVICE_DISCONNECTED) don't log it
-      if(reading > -67) {
-	transmit_data(reading);
-      }
+      take_temperature_reading();
       transmit_voltage_data(read_vcc());
-
       delay(5);               // wait until the last serial character is sent
       xbee_sleep();
     }
 
     system_sleep();
+  }
+}
+
+
+void take_temperature_reading() {
+  float reading;
+
+  reading = read_data();
+
+  // if reading is outside range (probably DEVICE_DISCONNECTED) don't log it
+  if(reading > -67) {
+    transmit_data(reading);
   }
 }
 
