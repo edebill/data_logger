@@ -5,13 +5,13 @@ You can check out the
 
 
 
-<% form_for @report, :url => { :controller => 'report',
-                               :action => 'manual' }  do |f| %>
+<%= form_for @report, :url => { :controller => 'report',
+                                :action => 'manual' }  do |f| %>
 <p>
 <table>
   <tr>
     <td valign="top">
-  <% f.fields_for :sources do |sf| %>
+  <%= f.fields_for :sources do |sf| %>
     <%= sf.label :name, "Sources" %>
     </td>
     <td>
