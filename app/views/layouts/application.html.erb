@@ -10,7 +10,7 @@
     <%= javascript_include_tag 'jquery-1.4.1' %>
     <% if @custom_script %>
     <script type="text/javascript">
-      <%= @custom_script %>
+      <%= @custom_script.html_safe %>
     </script>
     <% end %>
   </head>
@@ -31,7 +31,7 @@
 	<%= yield %>
     </div><div id="footer">
       <div id="copyright">
-	&copy;<a href="http://erik.debill.org">Erik DeBill</a>, 2009-2010
+	&copy;<a href="http://erik.debill.org">Erik DeBill</a>, 2009-2011
       </div>
     </div></body>
 </html>
