@@ -94,5 +94,6 @@ DEPENDENCIES
   fog
   pg
   rails (= 3.0.5)
+  rake (~> 0.8.7)
   serialport
   shoulda
