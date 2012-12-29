@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'scaffold' %>
     <%= stylesheet_link_tag 'datalogger' %>
     <%= javascript_include_tag 'jquery-1.4.1' %>
+    <%= javascript_include_tag 'jquery.flot' %>
     <% if @custom_script %>
     <script type="text/javascript">
       <%= @custom_script.html_safe %>
@@ -31,7 +32,7 @@
 	<%= yield %>
     </div><div id="footer">
       <div id="copyright">
-	&copy;<a href="http://erik.debill.org">Erik DeBill</a>, 2009-2011
+	&copy;<a href="http://erik.debill.org">Erik DeBill</a>, 2009-2012
       </div>
     </div></body>
 </html>

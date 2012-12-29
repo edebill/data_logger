@@ -30,6 +30,16 @@ div.menuitem {
 }
 
 
+#latest-trends-graph {
+    width: 100%;
+    min-height: 300px;
+    padding: 20px;
+}
+
+.graph-surround {
+    padding: 20px;
+    background-color: #ffffff;
+}
 
 #content {
     position: relative;

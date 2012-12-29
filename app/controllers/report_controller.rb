@@ -18,7 +18,7 @@ class ReportController < ApplicationController
   def latest_temps
     @title = "Latest Temperatures"
 
-    @temps = FahrenheitTemp.find(:all, :conditions => ['created_at > ? ', Time.now.utc - 30.minutes])
+    @temps = FahrenheitTemp.find(:all, :conditions => ['created_at > ? ', Time.now - 30.minutes])
     
     @sources = []
 
@@ -48,7 +48,6 @@ end
     @custom_script  += "});"
   end
 
-
   def latest_trends
     @title = "Latest Temperature Trends"
     start = Time.now.utc   # when this comes from user input, Rails gets it right
@@ -69,8 +68,9 @@ end
     @report = Report.new(:sources => latest_sources.collect {|s| Source.find(s.source_id)},
                          :start => start)
 
-    show_report()
+    @dataset = @report.to_flot_json
   end
+
 
 
   def show_report

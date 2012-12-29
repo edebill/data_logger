@@ -1,0 +1,24 @@
+<div class="graph-surround"><div id='latest-trends-graph' ></div></div>
+<script>
+  var dataset = <%= @report.to_flot_json.html_safe %>;
+
+  function show_graph(dataset) {
+    var width = $(window).width() - 80;
+    var height = $(window).height() - 120;
+
+    $("#latest-trends-graph").width(width);
+    $("#latest-trends-graph").height(height);
+
+    $.plot($("#latest-trends-graph"), dataset, {
+                              series: { lines: { show: true },
+                                        points: { show: true,
+                                                  radius: 1 }},
+                              xaxis: { mode: "time" },
+                              legend: { position: "se" } });
+
+  }
+
+
+  show_graph(dataset);
+
+</script>
