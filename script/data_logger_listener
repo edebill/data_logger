@@ -4,11 +4,22 @@ puts 'loading Rails...'
 require File.expand_path('../../config/boot', __FILE__)
 require File.expand_path('../../config/application', __FILE__)
 
+
+
 Rails.application.require_environment!
+
+serial_port = ENV['SERIAL_PORT']
+unless serial_port
+  puts "You must set the SERIAL_PORT environment variable in order for"
+  puts "this script to find your serial port/xbee reader."
+  puts "\nFor example: "
+  puts "SERIAL_PORT=/dev/ttyUSB0 bundle exec #{$0}"
+  exit 1
+end
 
 require 'serialport'
 
-sp = SerialPort.new "/dev/tty.usbserial-A6005v1G"
+sp = SerialPort.new serial_port
 puts "ready and listening"
 
 while true
