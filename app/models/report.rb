@@ -55,8 +55,8 @@ class Report < ActiveRecord::Base
 
   def to_flot_json
     temps = Report.prepare_temps(self)
-
+    utc_offset = Time.now.utc_offset
     temps.map { |s| { 'label' => s[:source].name,
-                       'data' => s[:readings].map {|r| [r.sampled_at.to_i * 1000, r.display_temp ] } } }.to_json
+                       'data' => s[:readings].map {|r| [(r.sampled_at.to_i + utc_offset) * 1000, r.display_temp ] } } }.to_json
   end
 end
