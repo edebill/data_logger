@@ -26,15 +26,17 @@ while true
   foo = sp.gets
   puts foo
   foo.chomp!
-  if e = LogEvent.parse(foo)
-    puts e.inspect
-    if e.save
-      md = foo.match(/:([^:]+)$/)
-      ack = "R:#{md[1]}"
-      sp.puts(ack)
-      puts "#{e.class.to_s} #{e.id} saved"
-    else
-      puts e.errors.full_messages
+  begin
+    if e = LogEvent.parse(foo)
+      puts e.inspect
+      if e.save
+        md = foo.match(/:([^:]+)$/)
+        ack = "R:#{md[1]}"
+        sp.puts(ack)
+        puts "#{e.class.to_s} #{e.id} saved"
+      else
+        puts e.errors.full_messages
+      end
     end
   rescue Object => e
     Rails.logger.warn("error parsing and saving event - (#{e})")
