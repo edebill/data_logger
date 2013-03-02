@@ -36,5 +36,7 @@ while true
     else
       puts e.errors.full_messages
     end
+  rescue Object => e
+    Rails.logger.warn("error parsing and saving event - (#{e})")
   end
 end

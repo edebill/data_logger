@@ -29,8 +29,6 @@ class LogEvent
     end
 
     return nil
-  rescue ArgumentError => e
-    Rails.logger.warn("invalid byte sequence - #{e} in '#{event_string}'")
   end
 
 end
