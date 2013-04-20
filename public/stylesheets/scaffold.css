@@ -5,10 +5,20 @@ body {
     color: #333;
  }
 
+
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
+  font-size:   100%;
+  line-height: 100%;
+}
+
+@media (min-resolution: 200dpi) {
+  body, p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size:   26px;
+    line-height: 36px;
+    color: #f00;
+  }
 }
 
 pre {
