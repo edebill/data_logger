@@ -8,11 +8,13 @@ class FahrenheitTemp < ActiveRecord::Base
   end
 
   def display_temp
-    if self.source.temp_offset.nil?
+    dt = if self.source.temp_offset.nil?
       self.temp
     else
       self.temp + self.source.temp_offset
     end
+
+    sprintf("%.2f", dt)
   end
 
   def parse(string)
